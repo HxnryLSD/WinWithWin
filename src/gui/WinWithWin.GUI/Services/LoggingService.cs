@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using System.Security.Principal;
 using System.Text;
 
 namespace WinWithWin.GUI.Services
@@ -100,20 +101,72 @@ namespace WinWithWin.GUI.Services
         }
 
         /// <summary>
-        /// Logs session start.
+        /// Logs session start with environment details.
         /// </summary>
         public static void LogSessionStart()
         {
+            var isAdmin = IsRunningAsAdmin();
+            var adminStatus = isAdmin ? "YES ✓" : "NO ✗ (some tweaks may fail)";
+            
             var sb = new StringBuilder();
+            sb.AppendLine();
             sb.AppendLine("═══════════════════════════════════════════════════════════════");
             sb.AppendLine($"  WinWithWin Session Started");
             sb.AppendLine($"  Time: {DateTime.Now:yyyy-MM-dd HH:mm:ss}");
+            sb.AppendLine("───────────────────────────────────────────────────────────────");
             sb.AppendLine($"  OS: {Environment.OSVersion}");
+            sb.AppendLine($"  Windows Version: {GetWindowsVersion()}");
             sb.AppendLine($"  User: {Environment.UserName}");
             sb.AppendLine($"  Machine: {Environment.MachineName}");
+            sb.AppendLine($"  Running as Administrator: {adminStatus}");
+            sb.AppendLine($"  64-bit OS: {Environment.Is64BitOperatingSystem}");
+            sb.AppendLine($"  64-bit Process: {Environment.Is64BitProcess}");
+            sb.AppendLine($"  .NET Version: {Environment.Version}");
             sb.AppendLine("═══════════════════════════════════════════════════════════════");
+            sb.AppendLine();
             
             WriteLogRaw(sb.ToString());
+            
+            if (!isAdmin)
+            {
+                LogWarning("Application is NOT running as Administrator. Many tweaks require admin privileges and will fail.");
+                LogWarning("Right-click the application and select 'Run as administrator' for full functionality.");
+            }
+        }
+        
+        /// <summary>
+        /// Checks if the current process is running with administrator privileges.
+        /// </summary>
+        public static bool IsRunningAsAdmin()
+        {
+            try
+            {
+                using var identity = WindowsIdentity.GetCurrent();
+                var principal = new WindowsPrincipal(identity);
+                return principal.IsInRole(WindowsBuiltInRole.Administrator);
+            }
+            catch
+            {
+                return false;
+            }
+        }
+        
+        /// <summary>
+        /// Gets the Windows version string.
+        /// </summary>
+        private static string GetWindowsVersion()
+        {
+            try
+            {
+                var version = Environment.OSVersion.Version;
+                return version.Build >= 22000 ? $"Windows 11 (Build {version.Build})" :
+                       version.Build >= 10240 ? $"Windows 10 (Build {version.Build})" :
+                       $"Windows {version.Major}.{version.Minor} (Build {version.Build})";
+            }
+            catch
+            {
+                return "Unknown";
+            }
         }
 
         /// <summary>

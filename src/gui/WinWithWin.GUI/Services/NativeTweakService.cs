@@ -103,6 +103,7 @@ namespace WinWithWin.GUI.Services
                     "optimize_memory" => ExecuteWithLogging(nameof(OptimizeMemory), OptimizeMemory),
                     // Security Tweaks
                     "disable_remote_desktop" => ExecuteWithLogging(nameof(DisableRemoteDesktop), DisableRemoteDesktop),
+                    "disable_remote_assistance" => ExecuteWithLogging(nameof(DisableRemoteAssistance), DisableRemoteAssistance),
                     "configure_uac" => ExecuteWithLogging(nameof(ConfigureUac), ConfigureUac),
                     "configure_smartscreen" => ExecuteWithLogging(nameof(ConfigureSmartScreen), ConfigureSmartScreen),
                     "ensure_defender_enabled" => ExecuteWithLogging(nameof(EnsureDefenderEnabled), EnsureDefenderEnabled),
@@ -198,6 +199,7 @@ namespace WinWithWin.GUI.Services
                     "optimize_memory" => ExecuteWithLogging(nameof(UndoOptimizeMemory), UndoOptimizeMemory),
                     // Security Tweaks
                     "disable_remote_desktop" => ExecuteWithLogging(nameof(EnableRemoteDesktop), EnableRemoteDesktop),
+                    "disable_remote_assistance" => ExecuteWithLogging(nameof(EnableRemoteAssistance), EnableRemoteAssistance),
                     "configure_uac" => ExecuteWithLogging(nameof(ResetUac), ResetUac),
                     "configure_smartscreen" => ExecuteWithLogging(nameof(ResetSmartScreen), ResetSmartScreen),
                     "ensure_defender_enabled" => TweakResult.Ok(), // Already enabled, nothing to undo
@@ -632,6 +634,7 @@ namespace WinWithWin.GUI.Services
 
         private bool RunPowerCfgCommand(string arguments)
         {
+            LoggingService.LogInfo($"      [PowerCfg] Running: powercfg {arguments}");
             try
             {
                 var psi = new ProcessStartInfo
@@ -644,12 +647,68 @@ namespace WinWithWin.GUI.Services
                     RedirectStandardError = true
                 };
                 using var process = Process.Start(psi);
-                process?.WaitForExit(10000);
-                return process?.ExitCode == 0;
+                if (process == null)
+                {
+                    LoggingService.LogError($"      [PowerCfg] Failed to start process for: powercfg {arguments}");
+                    return false;
+                }
+                
+                var stdout = process.StandardOutput.ReadToEnd();
+                var stderr = process.StandardError.ReadToEnd();
+                process.WaitForExit(10000);
+                
+                var exitCode = process.ExitCode;
+                if (exitCode == 0)
+                {
+                    LoggingService.LogInfo($"      [PowerCfg] Success (exit code 0)");
+                    if (!string.IsNullOrWhiteSpace(stdout))
+                        LoggingService.LogInfo($"      [PowerCfg] Output: {stdout.Trim()}");
+                }
+                else
+                {
+                    LoggingService.LogWarning($"      [PowerCfg] Failed with exit code {exitCode}");
+                    if (!string.IsNullOrWhiteSpace(stdout))
+                        LoggingService.LogWarning($"      [PowerCfg] StdOut: {stdout.Trim()}");
+                    if (!string.IsNullOrWhiteSpace(stderr))
+                        LoggingService.LogWarning($"      [PowerCfg] StdErr: {stderr.Trim()}");
+                    
+                    // Log known error codes
+                    if (stderr.Contains("does not exist") || stdout.Contains("does not exist"))
+                        LoggingService.LogWarning($"      [PowerCfg] The specified power scheme GUID does not exist on this system");
+                }
+                
+                return exitCode == 0;
+            }
+            catch (Exception ex)
+            {
+                LoggingService.LogError($"      [PowerCfg] Exception running powercfg {arguments}: {ex.Message}", ex);
+                return false;
+            }
+        }
+
+        private string? RunPowerCfgCommandWithOutput(string arguments)
+        {
+            try
+            {
+                var psi = new ProcessStartInfo
+                {
+                    FileName = "powercfg",
+                    Arguments = arguments,
+                    UseShellExecute = false,
+                    CreateNoWindow = true,
+                    RedirectStandardOutput = true,
+                    RedirectStandardError = true
+                };
+                using var process = Process.Start(psi);
+                if (process == null) return null;
+                
+                var output = process.StandardOutput.ReadToEnd();
+                process.WaitForExit(10000);
+                return output;
             }
             catch
             {
-                return false;
+                return null;
             }
         }
 
@@ -762,7 +821,33 @@ namespace WinWithWin.GUI.Services
 
         private bool SetPowerHighPerformance()
         {
-            // GUID for High Performance power plan
+            LoggingService.LogInfo($"      Activating High Performance power plan (GUID: 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c)");
+            
+            // First check if the plan exists
+            var listResult = RunPowerCfgCommandWithOutput("/list");
+            if (!string.IsNullOrEmpty(listResult))
+            {
+                LoggingService.LogInfo($"      Available power plans on this system:");
+                foreach (var line in listResult.Split('\n').Where(l => l.Contains("GUID")))
+                {
+                    LoggingService.LogInfo($"        {line.Trim()}");
+                }
+                
+                if (!listResult.Contains("8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c"))
+                {
+                    LoggingService.LogWarning($"      High Performance plan (8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c) NOT FOUND on this system!");
+                    LoggingService.LogInfo($"      This is common in Windows Sandbox/VMs. Trying to use existing plans...");
+                    
+                    // Try balanced plan as fallback
+                    if (listResult.Contains("381b4222-f694-41f0-9685-ff5bb260df2e"))
+                    {
+                        LoggingService.LogInfo($"      Falling back to Balanced plan...");
+                        return RunPowerCfgCommand("/setactive 381b4222-f694-41f0-9685-ff5bb260df2e");
+                    }
+                    return false;
+                }
+            }
+            
             return RunPowerCfgCommand("/setactive 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c");
         }
 
@@ -774,10 +859,42 @@ namespace WinWithWin.GUI.Services
 
         private bool SetPowerUltimate()
         {
-            // First, duplicate and create Ultimate Performance if it doesn't exist
-            RunPowerCfgCommand("/duplicatescheme e9a42b02-d5df-448d-aa00-03f14749eb61");
+            LoggingService.LogInfo($"      Activating Ultimate Performance power plan (GUID: e9a42b02-d5df-448d-aa00-03f14749eb61)");
+            
+            // First check available plans
+            var listResult = RunPowerCfgCommandWithOutput("/list");
+            if (!string.IsNullOrEmpty(listResult))
+            {
+                LoggingService.LogInfo($"      Available power plans on this system:");
+                foreach (var line in listResult.Split('\n').Where(l => l.Contains("GUID")))
+                {
+                    LoggingService.LogInfo($"        {line.Trim()}");
+                }
+            }
+            
+            // Ultimate Performance is not available on all Windows versions (requires Pro/Enterprise or Windows 11)
+            // Also not available in VMs/Sandbox
+            
+            // Try to duplicate the scheme first
+            LoggingService.LogInfo($"      Attempting to create Ultimate Performance scheme...");
+            var duplicateResult = RunPowerCfgCommand("/duplicatescheme e9a42b02-d5df-448d-aa00-03f14749eb61");
+            
+            if (!duplicateResult)
+            {
+                LoggingService.LogWarning($"      Ultimate Performance scheme could not be created (may not be available on this Windows version/edition)");
+                LoggingService.LogInfo($"      Falling back to High Performance...");
+                return SetPowerHighPerformance();
+            }
+            
             // Then activate it
-            return RunPowerCfgCommand("/setactive e9a42b02-d5df-448d-aa00-03f14749eb61");
+            var activateResult = RunPowerCfgCommand("/setactive e9a42b02-d5df-448d-aa00-03f14749eb61");
+            if (!activateResult)
+            {
+                LoggingService.LogWarning($"      Could not activate Ultimate Performance, falling back to High Performance");
+                return SetPowerHighPerformance();
+            }
+            
+            return true;
         }
 
         private bool DisableHibernate()
@@ -1302,10 +1419,12 @@ namespace WinWithWin.GUI.Services
 
         private bool EnableRemoteDesktop()
         {
+            LoggingService.LogInfo($"      Enabling Remote Desktop");
             SetRegistryValue(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Control\Terminal Server", "fDenyTSConnections", 0);
             
             try
             {
+                LoggingService.LogInfo($"      Enabling Remote Desktop firewall rules");
                 var psi = new ProcessStartInfo
                 {
                     FileName = "netsh",
@@ -1316,8 +1435,39 @@ namespace WinWithWin.GUI.Services
                 using var process = Process.Start(psi);
                 process?.WaitForExit(5000);
             }
-            catch { }
+            catch (Exception ex)
+            {
+                LoggingService.LogWarning($"      Could not enable firewall rule: {ex.Message}");
+            }
             
+            return true;
+        }
+
+        private bool DisableRemoteAssistance()
+        {
+            LoggingService.LogInfo($"      Disabling Windows Remote Assistance");
+            
+            // Disable Remote Assistance via registry
+            SetRegistryValue(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Control\Remote Assistance", "fAllowToGetHelp", 0);
+            SetRegistryValue(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Control\Remote Assistance", "fAllowFullControl", 0);
+            
+            // Disable through Group Policy
+            SetRegistryValue(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services", "fAllowToGetHelp", 0);
+            
+            LoggingService.LogInfo($"      Remote Assistance disabled");
+            return true;
+        }
+
+        private bool EnableRemoteAssistance()
+        {
+            LoggingService.LogInfo($"      Enabling Windows Remote Assistance");
+            
+            // Re-enable Remote Assistance
+            SetRegistryValue(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Control\Remote Assistance", "fAllowToGetHelp", 1);
+            DeleteRegistryValue(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Control\Remote Assistance", "fAllowFullControl");
+            DeleteRegistryValue(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services", "fAllowToGetHelp");
+            
+            LoggingService.LogInfo($"      Remote Assistance enabled");
             return true;
         }
 
@@ -1410,21 +1560,73 @@ namespace WinWithWin.GUI.Services
 
         private bool DisableWidgets()
         {
-            // Disable Windows Widgets (Windows 11)
-            SetRegistryValue(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Dsh", "AllowNewsAndInterests", 0);
-            SetRegistryValue(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "TaskbarDa", 0);
+            LoggingService.LogInfo($"      Disabling Windows Widgets (Windows 11 feature)");
+            
+            bool anySuccess = false;
+            bool anyError = false;
+            
+            // Try HKLM policy key (requires admin)
+            try
+            {
+                LoggingService.LogInfo($"      Attempting HKLM policy (requires admin)...");
+                SetRegistryValue(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Dsh", "AllowNewsAndInterests", 0);
+                anySuccess = true;
+            }
+            catch (UnauthorizedAccessException)
+            {
+                LoggingService.LogWarning($"      HKLM policy requires admin - skipping, will try user settings instead");
+                anyError = true;
+            }
+            
+            // Try HKCU key (works without admin)
+            try
+            {
+                LoggingService.LogInfo($"      Setting user preference (TaskbarDa = 0)...");
+                SetRegistryValue(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "TaskbarDa", 0);
+                anySuccess = true;
+            }
+            catch (Exception ex)
+            {
+                LoggingService.LogError($"      Failed to set TaskbarDa: {ex.Message}");
+                anyError = true;
+            }
             
             // Kill widgets process
             try
             {
-                foreach (var process in Process.GetProcessesByName("Widgets"))
+                var processes = Process.GetProcessesByName("Widgets");
+                if (processes.Length > 0)
                 {
-                    process.Kill();
+                    LoggingService.LogInfo($"      Found {processes.Length} Widgets process(es), terminating...");
+                    foreach (var process in processes)
+                    {
+                        process.Kill();
+                        process.Dispose();
+                    }
+                    LoggingService.LogInfo($"      Widgets processes terminated");
+                }
+                else
+                {
+                    LoggingService.LogInfo($"      No Widgets processes running");
                 }
             }
-            catch { }
+            catch (Exception ex)
+            {
+                LoggingService.LogWarning($"      Could not kill Widgets process: {ex.Message}");
+            }
             
-            return true;
+            if (!anySuccess)
+            {
+                LoggingService.LogError($"      DisableWidgets: All registry operations failed");
+                return false;
+            }
+            
+            if (anyError)
+            {
+                LoggingService.LogWarning($"      DisableWidgets: Partially successful (some operations required admin)");
+            }
+            
+            return true; // At least user setting was applied
         }
 
         private bool EnableWidgets()
@@ -1585,28 +1787,73 @@ namespace WinWithWin.GUI.Services
 
         private void SetRegistryValue(RegistryKey rootKey, string subKeyPath, string valueName, object value)
         {
-            using var key = rootKey.CreateSubKey(subKeyPath, true);
-            if (key != null)
+            var rootName = rootKey == Registry.LocalMachine ? "HKLM" : 
+                           rootKey == Registry.CurrentUser ? "HKCU" : 
+                           rootKey == Registry.ClassesRoot ? "HKCR" : "REG";
+            var fullPath = $"{rootName}\\{subKeyPath}";
+            var valueStr = value is byte[] bytes ? $"[Binary {bytes.Length} bytes]" : value?.ToString() ?? "null";
+            
+            LoggingService.LogInfo($"      [Registry] SET {fullPath} -> {valueName} = {valueStr}");
+            
+            try
             {
+                using var key = rootKey.CreateSubKey(subKeyPath, true);
+                if (key == null)
+                {
+                    LoggingService.LogError($"      [Registry] Failed to create/open key: {fullPath}");
+                    throw new InvalidOperationException($"Could not create registry key: {fullPath}");
+                }
+                
                 if (value is int intValue)
                     key.SetValue(valueName, intValue, RegistryValueKind.DWord);
                 else if (value is string strValue)
                     key.SetValue(valueName, strValue, RegistryValueKind.String);
                 else if (value is byte[] byteValue)
                     key.SetValue(valueName, byteValue, RegistryValueKind.Binary);
+                    
+                LoggingService.LogInfo($"      [Registry] OK: {valueName} written to {fullPath}");
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                LoggingService.LogError($"      [Registry] ACCESS DENIED: Cannot write to {fullPath}. Admin rights required or key is protected.");
+                throw; // Re-throw so ExecuteWithLogging can catch it
+            }
+            catch (System.Security.SecurityException ex)
+            {
+                LoggingService.LogError($"      [Registry] SECURITY ERROR: Cannot write to {fullPath}. {ex.Message}");
+                throw;
             }
         }
 
         private void DeleteRegistryValue(RegistryKey rootKey, string subKeyPath, string valueName)
         {
+            var rootName = rootKey == Registry.LocalMachine ? "HKLM" : 
+                           rootKey == Registry.CurrentUser ? "HKCU" : 
+                           rootKey == Registry.ClassesRoot ? "HKCR" : "REG";
+            var fullPath = $"{rootName}\\{subKeyPath}";
+            
+            LoggingService.LogInfo($"      [Registry] DELETE {fullPath} -> {valueName}");
+            
             try
             {
                 using var key = rootKey.OpenSubKey(subKeyPath, true);
-                key?.DeleteValue(valueName, false);
+                if (key == null)
+                {
+                    LoggingService.LogInfo($"      [Registry] Key does not exist (OK): {fullPath}");
+                    return;
+                }
+                key.DeleteValue(valueName, false);
+                LoggingService.LogInfo($"      [Registry] OK: Deleted {valueName} from {fullPath}");
             }
-            catch
+            catch (UnauthorizedAccessException)
             {
-                // Value doesn't exist, which is fine
+                LoggingService.LogWarning($"      [Registry] Cannot delete {valueName} from {fullPath}: Access denied");
+                // Don't throw - deletion is often optional
+            }
+            catch (Exception ex)
+            {
+                LoggingService.LogWarning($"      [Registry] Cannot delete {valueName}: {ex.Message}");
+                // Don't throw - value might not exist which is fine
             }
         }
 
