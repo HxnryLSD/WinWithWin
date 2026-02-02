@@ -32,7 +32,7 @@
   - Hybrid Sleep Einstellungen
   - Wake Timer Kontrolle
 
-- [ ] **Storage Optimization**
+- [x] **Storage Optimization**
   - Temp-Dateien Cleaner
   - Windows Update Cache leeren
   - Prefetch/Superfetch Management

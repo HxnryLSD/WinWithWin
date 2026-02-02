@@ -63,19 +63,57 @@ namespace WinWithWin.GUI.Services
             return result;
         }
 
+        /// <summary>
+        /// Gets a string with a fallback if localization fails
+        /// </summary>
+        public string GetStringOrFallback(string key, string fallback, Dictionary<string, string>? variables = null)
+        {
+            var result = GetString(key, variables);
+            return result == key ? fallback : result;
+        }
+
         private void LoadLocale(string locale)
         {
-            var localeFile = Path.Combine(_localesPath, $"{locale}.json");
-
-            if (!File.Exists(localeFile))
+            try
             {
-                localeFile = Path.Combine(_localesPath, "en.json");
+                var localeFile = Path.Combine(_localesPath, $"{locale}.json");
+
+                if (!File.Exists(localeFile))
+                {
+                    localeFile = Path.Combine(_localesPath, "en.json");
+                }
+
+                if (File.Exists(localeFile))
+                {
+                    var json = File.ReadAllText(localeFile);
+                    _strings = JsonConvert.DeserializeObject<JObject>(json);
+                }
+                else
+                {
+                    // Initialize with minimal default strings for critical UI elements
+                    _strings = JObject.Parse(@"{
+                        ""dialogs"": {
+                            ""loadError"": {
+                                ""title"": ""Error"",
+                                ""message"": ""Failed to load tweaks: {message}""
+                            },
+                            ""initError"": {
+                                ""title"": ""WinWithWin Startup Error"",
+                                ""message"": ""Failed to initialize application:\n\n{message}""
+                            }
+                        },
+                        ""status"": {
+                            ""ready"": ""Ready"",
+                            ""loading"": ""Loading tweaks..."",
+                            ""loadError"": ""Error loading tweaks: {message}""
+                        }
+                    }");
+                }
             }
-
-            if (File.Exists(localeFile))
+            catch
             {
-                var json = File.ReadAllText(localeFile);
-                _strings = JsonConvert.DeserializeObject<JObject>(json);
+                // Fallback to minimal defaults
+                _strings = JObject.Parse(@"{""status"":{""ready"":""Ready""}}");
             }
         }
     }

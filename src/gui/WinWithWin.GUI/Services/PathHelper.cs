@@ -47,12 +47,42 @@ namespace WinWithWin.GUI.Services
         /// <summary>
         /// Gets the path to the Config directory
         /// </summary>
-        public static string ConfigPath => Path.Combine(ApplicationDirectory, "Config");
+        public static string ConfigPath
+        {
+            get
+            {
+                // Try lowercase first (how it's stored in repo), then uppercase
+                var lowercase = Path.Combine(ApplicationDirectory, "config");
+                if (Directory.Exists(lowercase))
+                    return lowercase;
+                
+                var uppercase = Path.Combine(ApplicationDirectory, "Config");
+                if (Directory.Exists(uppercase))
+                    return uppercase;
+                
+                return lowercase; // Return lowercase as default
+            }
+        }
 
         /// <summary>
         /// Gets the path to the Locales directory
         /// </summary>
-        public static string LocalesPath => Path.Combine(ApplicationDirectory, "Locales");
+        public static string LocalesPath
+        {
+            get
+            {
+                // Try lowercase first (how it's stored in repo), then uppercase
+                var lowercase = Path.Combine(ApplicationDirectory, "locales");
+                if (Directory.Exists(lowercase))
+                    return lowercase;
+                
+                var uppercase = Path.Combine(ApplicationDirectory, "Locales");
+                if (Directory.Exists(uppercase))
+                    return uppercase;
+                
+                return lowercase; // Return lowercase as default
+            }
+        }
 
         /// <summary>
         /// Gets the path to the Assets directory

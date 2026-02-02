@@ -16,6 +16,21 @@ namespace WinWithWin.GUI.Services
         private readonly string _configPath;
         private TweakConfig? _tweakConfig;
 
+        /// <summary>
+        /// Event raised when progress updates during tweak operations.
+        /// </summary>
+        public event Action<int, string>? ProgressChanged;
+
+        /// <summary>
+        /// Event raised when a tweak operation starts.
+        /// </summary>
+        public event Action<string>? OperationStarted;
+
+        /// <summary>
+        /// Event raised when a tweak operation ends.
+        /// </summary>
+        public event Action? OperationEnded;
+
         public TweakService(PowerShellService powerShell, LocalizationService localizationService)
         {
             _powerShell = powerShell;
@@ -31,7 +46,9 @@ namespace WinWithWin.GUI.Services
             
             if (!File.Exists(tweaksFile))
             {
-                throw new FileNotFoundException("Tweaks configuration not found", tweaksFile);
+                throw new FileNotFoundException(
+                    $"Tweaks configuration not found.\n\nExpected location: {tweaksFile}\n\nMake sure the 'config' folder is in the same directory as the executable.", 
+                    tweaksFile);
             }
 
             var json = await File.ReadAllTextAsync(tweaksFile);
@@ -111,32 +128,118 @@ namespace WinWithWin.GUI.Services
 
         public async Task<bool> ApplyTweakAsync(string tweakId)
         {
-            // First try native C# implementation (works without PowerShell modules)
-            if (_nativeTweakService.ApplyTweak(tweakId))
+            var tweakName = GetTweakName(tweakId);
+            OperationStarted?.Invoke(tweakName);
+            
+            try
             {
-                return true;
+                // First try native C# implementation with detailed result
+                var nativeResult = _nativeTweakService.ApplyTweakWithDetails(tweakId);
+                
+                if (nativeResult.Success)
+                {
+                    return true;
+                }
+
+                // Check if it's "not supported" - then try PowerShell fallback
+                if (nativeResult.ErrorMessage?.Contains("not implemented") == true)
+                {
+                    // Fallback to PowerShell if native implementation doesn't support this tweak
+                    var tweak = FindTweak(tweakId);
+                    if (tweak?.Functions?.Set == null)
+                    {
+                        LoggingService.LogTweakResult(tweakId, tweakName, true, false, "No implementation found (neither native nor PowerShell)");
+                        return false;
+                    }
+
+                    LoggingService.LogInfo($"Falling back to PowerShell for tweak: {tweakId}");
+                    var psResult = await _powerShell.InvokeTweakFunctionAsync(tweak.Functions.Set);
+                    
+                    if (psResult)
+                    {
+                        LoggingService.LogTweakResult(tweakId, tweakName, true, true, "Applied via PowerShell");
+                    }
+                    else
+                    {
+                        LoggingService.LogTweakResult(tweakId, tweakName, true, false, 
+                            "PowerShell execution failed. Check if PowerShell modules are available and the function exists.");
+                    }
+                    return psResult;
+                }
+
+                // Native implementation failed with an actual error
+                LoggingService.LogTweakResult(tweakId, tweakName, true, false, 
+                    $"{nativeResult.ErrorMessage}\n{nativeResult.ErrorDetails}");
+                return false;
             }
-
-            // Fallback to PowerShell if native implementation doesn't support this tweak
-            var tweak = FindTweak(tweakId);
-            if (tweak?.Functions?.Set == null) return false;
-
-            return await _powerShell.InvokeTweakFunctionAsync(tweak.Functions.Set);
+            catch (Exception ex)
+            {
+                LoggingService.LogTweakResult(tweakId, tweakName, true, false, ex.Message);
+                LoggingService.LogError($"Exception applying tweak {tweakId}", ex);
+                return false;
+            }
+            finally
+            {
+                OperationEnded?.Invoke();
+            }
         }
 
         public async Task<bool> UndoTweakAsync(string tweakId)
         {
-            // First try native C# implementation (works without PowerShell modules)
-            if (_nativeTweakService.UndoTweak(tweakId))
+            var tweakName = GetTweakName(tweakId);
+            OperationStarted?.Invoke(tweakName);
+            
+            try
             {
-                return true;
+                // First try native C# implementation with detailed result
+                var nativeResult = _nativeTweakService.UndoTweakWithDetails(tweakId);
+                
+                if (nativeResult.Success)
+                {
+                    return true;
+                }
+
+                // Check if it's "not supported" - then try PowerShell fallback
+                if (nativeResult.ErrorMessage?.Contains("not implemented") == true)
+                {
+                    // Fallback to PowerShell if native implementation doesn't support this tweak
+                    var tweak = FindTweak(tweakId);
+                    if (tweak?.Functions?.Undo == null)
+                    {
+                        LoggingService.LogTweakResult(tweakId, tweakName, false, false, "No implementation found (neither native nor PowerShell)");
+                        return false;
+                    }
+
+                    LoggingService.LogInfo($"Falling back to PowerShell for undo tweak: {tweakId}");
+                    var psResult = await _powerShell.InvokeTweakFunctionAsync(tweak.Functions.Undo);
+                    
+                    if (psResult)
+                    {
+                        LoggingService.LogTweakResult(tweakId, tweakName, false, true, "Undone via PowerShell");
+                    }
+                    else
+                    {
+                        LoggingService.LogTweakResult(tweakId, tweakName, false, false, 
+                            "PowerShell execution failed. Check if PowerShell modules are available and the function exists.");
+                    }
+                    return psResult;
+                }
+
+                // Native implementation failed with an actual error
+                LoggingService.LogTweakResult(tweakId, tweakName, false, false, 
+                    $"{nativeResult.ErrorMessage}\n{nativeResult.ErrorDetails}");
+                return false;
             }
-
-            // Fallback to PowerShell if native implementation doesn't support this tweak
-            var tweak = FindTweak(tweakId);
-            if (tweak?.Functions?.Undo == null) return false;
-
-            return await _powerShell.InvokeTweakFunctionAsync(tweak.Functions.Undo);
+            catch (Exception ex)
+            {
+                LoggingService.LogTweakResult(tweakId, tweakName, false, false, ex.Message);
+                LoggingService.LogError($"Exception undoing tweak {tweakId}", ex);
+                return false;
+            }
+            finally
+            {
+                OperationEnded?.Invoke();
+            }
         }
 
         public async Task<bool> ApplyPresetAsync(string presetName)
@@ -145,6 +248,7 @@ namespace WinWithWin.GUI.Services
             
             if (!File.Exists(presetFile))
             {
+                LoggingService.LogError($"Preset file not found: {presetFile}");
                 throw new FileNotFoundException("Preset not found", presetFile);
             }
 
@@ -153,16 +257,32 @@ namespace WinWithWin.GUI.Services
 
             if (preset?.Tweaks == null) return false;
 
+            LoggingService.LogInfo($"Applying preset: {presetName} with {preset.Tweaks.Length} tweaks");
+            
             var success = true;
+            var total = preset.Tweaks.Length;
+            var current = 0;
+            
             foreach (var tweakId in preset.Tweaks)
             {
+                current++;
+                var percent = (int)((current * 100.0) / total);
+                ProgressChanged?.Invoke(percent, $"Applying {tweakId}...");
+                
                 if (!await ApplyTweakAsync(tweakId))
                 {
                     success = false;
                 }
             }
 
+            LoggingService.LogInfo($"Preset {presetName} completed. Success: {success}");
             return success;
+        }
+
+        private string GetTweakName(string tweakId)
+        {
+            var tweak = FindTweak(tweakId);
+            return tweak?.Name ?? tweakId;
         }
 
         public async Task<bool> CreateRestorePointAsync(string description)

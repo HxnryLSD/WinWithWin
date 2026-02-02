@@ -3,8 +3,30 @@
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
 ![Windows](https://img.shields.io/badge/Windows-10%20%7C%2011-0078D6?logo=windows)
 ![PowerShell](https://img.shields.io/badge/PowerShell-5.1%2B-5391FE?logo=powershell)
+![Status](https://img.shields.io/badge/Status-Work%20in%20Progress-orange.svg)
 
 > **Tweak like a pro, whether you're a beginner or expert.**
+
+---
+
+## ⚠️ IMPORTANT NOTICE - WORK IN PROGRESS ⚠️
+
+**This project is far from finished!**
+
+🚧 **Do NOT use this for private or commercial purposes!** 🚧
+
+- This is an **early development version** and should be treated as experimental
+- **Bugs and errors are expected** - things may break or not work as intended
+- **Code quality varies** - some parts may contain poorly written or unoptimized code
+- Features may be incomplete, missing, or change without notice
+- **No warranty or support** is provided at this stage
+
+**Use at your own risk!** If you choose to test this software, make sure to:
+- Create a full system backup first
+- Test in a virtual machine (Windows Sandbox recommended)
+- Never use on production systems
+
+---
 
 A simple, user-friendly "all-in-one" Windows tweaker. No tweaks that lead to an unstable system. No tweaks that cause FPS drops. Open-source and fully usable offline. For performance, for privacy, for security, for everyone.
 
@@ -48,7 +70,7 @@ A simple, user-friendly "all-in-one" Windows tweaker. No tweaks that lead to an 
 - Windows 10 (1903+) or Windows 11
 - PowerShell 5.1 or later
 - Administrator privileges
-- .NET 8.0 Runtime (for GUI only)
+- .NET 8.0 Runtime (for GUI - not needed for standalone version)
 
 ## 🚀 Quick Start
 
@@ -59,19 +81,19 @@ Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process
 .\WinWithWin.ps1
 ```
 
-### GUI Application
+### GUI Application (requires .NET 8.0)
 ```powershell
-# Run the GUI (requires .NET 8.0 Runtime)
-.\WinWithWin.GUI.exe
+# Run the GUI (requires .NET 8.0 Runtime installed)
+dotnet run --project src\gui\WinWithWin.GUI
 ```
 
 ### Standalone (No .NET Required)
 ```powershell
 # Run the standalone version - no .NET installation needed
-.\WinWithWin.Standalone.exe
+.\WinWithWin.GUI.exe
 ```
 
-> **💡 Tipp:** Die Standalone-Version ist größer (~150MB), läuft aber auf jedem Windows-System ohne zusätzliche Abhängigkeiten. Perfekt für USB-Sticks oder Systeme ohne Internetzugang.
+> **💡 Tipp:** Die Standalone-Version ist größer (~200MB), läuft aber auf jedem Windows-System ohne zusätzliche Abhängigkeiten. Perfekt für USB-Sticks oder Systeme ohne Internetzugang.
 
 ## 📁 Project Structure
 
@@ -208,14 +230,16 @@ This creates `out/WinWithWin.ps1` - a standalone PowerShell script.
 
 ### Self-Contained Build (No .NET Runtime Required)
 
-To create an .exe that doesn't require .NET to be installed:
+To create a single .exe that doesn't require .NET to be installed:
 
 ```powershell
 cd src\gui\WinWithWin.GUI
-dotnet publish -c Release -r win-x64 --self-contained true -o ..\..\..\out\standalone
+dotnet publish -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true
 ```
 
-> **Note:** Self-contained builds are larger (~200MB) but run on any Windows system without .NET.
+The standalone executable will be in `bin\Release\net8.0-windows\win-x64\publish\`.
+
+> **Note:** Self-contained builds are larger (~200MB) but run on any Windows system without .NET. Config and locale files are embedded and extracted automatically on first run.
 
 ## 🤝 Contributing
 

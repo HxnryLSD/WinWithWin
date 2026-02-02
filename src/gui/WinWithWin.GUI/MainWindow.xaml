@@ -378,13 +378,33 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
                 
-                <TextBlock x:Name="StatusText" Text="Ready" 
-                           Foreground="{DynamicResource SecondaryTextBrush}"
-                           VerticalAlignment="Center"/>
+                <StackPanel Grid.Column="0" VerticalAlignment="Center">
+                    <TextBlock x:Name="StatusText" Text="Ready" 
+                               Foreground="{DynamicResource SecondaryTextBrush}"/>
+                    
+                    <!-- Progress Bar (hidden by default) -->
+                    <Grid x:Name="ProgressContainer" Visibility="Collapsed" Margin="0,5,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" MaxWidth="300"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <ProgressBar x:Name="OperationProgress" 
+                                     Height="4" 
+                                     Minimum="0" Maximum="100" Value="0"
+                                     Background="{DynamicResource BorderBrush}"
+                                     Foreground="{DynamicResource PrimaryBrush}"/>
+                        <TextBlock x:Name="ProgressText" Grid.Column="1" 
+                                   Text="0%" Margin="10,0,0,0"
+                                   FontSize="11"
+                                   Foreground="{DynamicResource SecondaryTextBrush}"
+                                   VerticalAlignment="Center"/>
+                    </Grid>
+                </StackPanel>
                 
-                <StackPanel Grid.Column="1" Orientation="Horizontal">
+                <StackPanel Grid.Column="2" Orientation="Horizontal">
                     <Button Content="Apply Selected" Style="{StaticResource PrimaryButtonStyle}"
                             Click="ApplySelectedButton_Click" Margin="0,0,10,0"/>
                     <Button Content="Undo All" Style="{StaticResource SecondaryButtonStyle}"

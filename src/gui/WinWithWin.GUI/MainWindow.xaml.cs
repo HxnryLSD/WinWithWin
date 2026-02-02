@@ -49,8 +49,17 @@ namespace WinWithWin.GUI
                 _historyService = new HistoryService();
                 _schedulerService = new SchedulerService();
 
+                // Subscribe to tweak service events for progress
+                _tweakService.OperationStarted += OnOperationStarted;
+                _tweakService.OperationEnded += OnOperationEnded;
+                _tweakService.ProgressChanged += OnProgressChanged;
+
                 // Subscribe to locale changes
                 _localizationService.LocaleChanged += OnLocaleChanged;
+
+                // Start logging session
+                LoggingService.LogSessionStart();
+                LoggingService.CleanupOldLogs();
 
                 InitializeSystemTray();
                 LoadSettings();
@@ -61,6 +70,7 @@ namespace WinWithWin.GUI
             }
             catch (Exception ex)
             {
+                LoggingService.LogError("Failed to initialize application", ex);
                 MessageBox.Show($"Failed to initialize application:\n\n{ex.Message}\n\n{ex.StackTrace}", 
                     "WinWithWin Startup Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 throw;
@@ -80,6 +90,63 @@ namespace WinWithWin.GUI
                 _localizationService.GetString("notifications.languageChanged.title"), 
                 _localizationService.GetString("notifications.languageChanged.message"));
         }
+
+        #region Progress Bar Handling
+
+        private void OnOperationStarted(string operationName)
+        {
+            Dispatcher.Invoke(() =>
+            {
+                ProgressContainer.Visibility = Visibility.Visible;
+                OperationProgress.IsIndeterminate = true;
+                ProgressText.Text = operationName;
+            });
+        }
+
+        private void OnOperationEnded()
+        {
+            Dispatcher.Invoke(() =>
+            {
+                ProgressContainer.Visibility = Visibility.Collapsed;
+                OperationProgress.IsIndeterminate = false;
+                OperationProgress.Value = 0;
+            });
+        }
+
+        private void OnProgressChanged(int percent, string message)
+        {
+            Dispatcher.Invoke(() =>
+            {
+                OperationProgress.IsIndeterminate = false;
+                OperationProgress.Value = percent;
+                ProgressText.Text = $"{percent}%";
+            });
+        }
+
+        private void ShowProgress(string message, int percent = -1)
+        {
+            ProgressContainer.Visibility = Visibility.Visible;
+            if (percent < 0)
+            {
+                OperationProgress.IsIndeterminate = true;
+                ProgressText.Text = message;
+            }
+            else
+            {
+                OperationProgress.IsIndeterminate = false;
+                OperationProgress.Value = percent;
+                ProgressText.Text = $"{percent}%";
+            }
+        }
+
+        private void HideProgress()
+        {
+            ProgressContainer.Visibility = Visibility.Collapsed;
+            OperationProgress.IsIndeterminate = false;
+            OperationProgress.Value = 0;
+        }
+
+        #endregion
 
         private void UpdateLocalizedTexts()
         {
@@ -261,6 +328,7 @@ namespace WinWithWin.GUI
 
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
+            LoggingService.LogSessionEnd();
             Close();
         }
 
