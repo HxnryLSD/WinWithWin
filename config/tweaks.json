@@ -1,0 +1,860 @@
+{
+  "$schema": "./tweaks.schema.json",
+  "version": "1.0.0",
+  "tweaks": [
+    {
+      "id": "disable_telemetry",
+      "name": "Disable Telemetry",
+      "category": "Privacy",
+      "risk": "Safe",
+      "description": "Disables Windows diagnostic data collection and telemetry services",
+      "detailedDescription": "Windows Telemetry sammelt kontinuierlich Daten über Ihre Systemnutzung, installierte Programme, Fehlermeldungen und Hardware-Konfiguration. Diese Daten werden an Microsoft-Server gesendet, um Windows zu verbessern. Dieser Tweak setzt die Telemetrie-Stufe auf 'Security' (minimal) und deaktiviert den DiagTrack-Dienst.",
+      "impact": "Reduziert den Netzwerk-Traffic und die CPU-Auslastung im Hintergrund. Microsoft erhält keine Nutzungsdaten mehr von Ihrem PC. Windows Updates funktionieren weiterhin normal.",
+      "recommendation": "Empfohlen für alle Nutzer, die Wert auf Privatsphäre legen. Hat keine negativen Auswirkungen auf die normale PC-Nutzung.",
+      "affectedComponents": ["DiagTrack Service", "Connected User Experiences", "Diagnostic Data Collection"],
+      "isReversible": true,
+      "supportedVersions": ["Windows10", "Windows11"],
+      "functions": {
+        "test": "Test-DisableTelemetry",
+        "set": "Set-DisableTelemetry",
+        "undo": "Undo-DisableTelemetry"
+      },
+      "registryKeys": [
+        "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\DataCollection"
+      ]
+    },
+    {
+      "id": "disable_advertising_id",
+      "name": "Disable Advertising ID",
+      "category": "Privacy",
+      "risk": "Safe",
+      "description": "Disables the Windows Advertising ID used for targeted ads",
+      "detailedDescription": "Die Werbe-ID ist eine eindeutige Kennung, die Windows jeder Installation zuweist. Apps und Werbetreibende können diese ID nutzen, um Ihr Verhalten über verschiedene Apps hinweg zu verfolgen und personalisierte Werbung anzuzeigen. Dieser Tweak deaktiviert diese ID vollständig.",
+      "impact": "Sie sehen weniger personalisierte Werbung in Apps. Cross-App-Tracking wird verhindert. Keine Auswirkungen auf App-Funktionalität.",
+      "recommendation": "Unbedingt empfohlen für jeden Nutzer. Es gibt keinen Nachteil bei der Deaktivierung.",
+      "affectedComponents": ["Windows Advertising Platform", "Microsoft Store Apps", "UWP Apps"],
+      "isReversible": true,
+      "supportedVersions": ["Windows10", "Windows11"],
+      "functions": {
+        "test": "Test-DisableAdvertisingId",
+        "set": "Set-DisableAdvertisingId",
+        "undo": "Undo-DisableAdvertisingId"
+      }
+    },
+    {
+      "id": "disable_activity_history",
+      "name": "Disable Activity History",
+      "category": "Privacy",
+      "risk": "Safe",
+      "description": "Disables Windows Activity History and Timeline feature",
+      "detailedDescription": "Der Aktivitätsverlauf speichert alle Ihre Aktionen: geöffnete Dokumente, besuchte Websites, verwendete Apps. Diese Daten werden lokal gespeichert und optional mit Ihrem Microsoft-Konto synchronisiert. Die Timeline-Funktion (Win+Tab) nutzt diese Daten.",
+      "impact": "Die Timeline-Funktion zeigt keine vergangenen Aktivitäten mehr. Cortana kann keine aktivitätsbasierten Vorschläge machen. Kein Einfluss auf normale PC-Nutzung.",
+      "recommendation": "Empfohlen für privatsphärebewusste Nutzer. Falls Sie die Timeline nutzen, behalten Sie diese Funktion aktiviert.",
+      "affectedComponents": ["Timeline Feature", "Activity History", "Cortana Suggestions", "Microsoft Account Sync"],
+      "isReversible": true,
+      "supportedVersions": ["Windows10", "Windows11"],
+      "functions": {
+        "test": "Test-DisableActivityHistory",
+        "set": "Set-DisableActivityHistory",
+        "undo": "Undo-DisableActivityHistory"
+      }
+    },
+    {
+      "id": "disable_location_tracking",
+      "name": "Disable Location Tracking",
+      "category": "Privacy",
+      "risk": "Safe",
+      "description": "Disables Windows location services and tracking",
+      "detailedDescription": "Windows kann Ihren Standort über GPS, WLAN-Netzwerke und IP-Adresse ermitteln. Diese Daten werden für Wetter-Apps, Karten und 'In der Nähe'-Funktionen genutzt, aber auch an Microsoft gesendet und im Standortverlauf gespeichert.",
+      "impact": "Apps können Ihren Standort nicht mehr automatisch abrufen. Wetter-Apps benötigen manuelle Standorteingabe. 'Mein Gerät finden' funktioniert nicht mehr.",
+      "recommendation": "Empfohlen für Desktop-PCs. Bei Laptops sollten Sie 'Mein Gerät finden' bedenken - nützlich bei Diebstahl.",
+      "affectedComponents": ["Location Services", "Find My Device", "Weather App", "Maps App"],
+      "isReversible": true,
+      "supportedVersions": ["Windows10", "Windows11"],
+      "functions": {
+        "test": "Test-DisableLocationTracking",
+        "set": "Set-DisableLocationTracking",
+        "undo": "Undo-DisableLocationTracking"
+      }
+    },
+    {
+      "id": "disable_feedback",
+      "name": "Disable Feedback Prompts",
+      "category": "Privacy",
+      "risk": "Safe",
+      "description": "Disables Windows feedback prompts and notifications",
+      "detailedDescription": "Windows fragt regelmäßig nach Feedback zu neuen Features und Ihrer Nutzungserfahrung. Diese Pop-ups erscheinen oft zu ungünstigen Zeitpunkten und unterbrechen Ihre Arbeit. Dieser Tweak deaktiviert alle Feedback-Anfragen von Microsoft.",
+      "impact": "Keine Feedback-Pop-ups mehr. Kein Einfluss auf Windows-Funktionalität. Microsoft erhält kein direktes Nutzerfeedback von Ihrem PC.",
+      "recommendation": "Empfohlen für alle Nutzer. Die Feedback-Funktion ist für normale Anwender nicht notwendig.",
+      "affectedComponents": ["Windows Feedback Hub", "SIUF Notifications", "Feature Survey Prompts"],
+      "isReversible": true,
+      "supportedVersions": ["Windows10", "Windows11"],
+      "functions": {
+        "test": "Test-DisableFeedback",
+        "set": "Set-DisableFeedback",
+        "undo": "Undo-DisableFeedback"
+      }
+    },
+    {
+      "id": "disable_tailored_experiences",
+      "name": "Disable Tailored Experiences",
+      "category": "Privacy",
+      "risk": "Safe",
+      "description": "Disables personalized tips and recommendations based on diagnostic data",
+      "detailedDescription": "Windows nutzt Ihre gesammelten Diagnosedaten, um 'personalisierte' Tipps, Werbung und Empfehlungen anzuzeigen. Dies umfasst App-Vorschläge, Produktwerbung im Startmenü und kontextbezogene Hinweise basierend auf Ihrem Nutzungsverhalten.",
+      "impact": "Keine personalisierten Werbung und Tipps mehr. Weniger Ablenkung. Ihre Diagnosedaten werden nicht für Marketing genutzt.",
+      "recommendation": "Unbedingt empfohlen. Diese Funktion ist hauptsächlich ein Marketing-Tool von Microsoft.",
+      "affectedComponents": ["Windows Tips", "Start Menu Suggestions", "Settings App Recommendations"],
+      "isReversible": true,
+      "supportedVersions": ["Windows10", "Windows11"],
+      "functions": {
+        "test": "Test-DisableTailoredExperiences",
+        "set": "Set-DisableTailoredExperiences",
+        "undo": "Undo-DisableTailoredExperiences"
+      }
+    },
+    {
+      "id": "disable_typing_data",
+      "name": "Disable Typing Data Collection",
+      "category": "Privacy",
+      "risk": "Safe",
+      "description": "Disables typing and inking data collection for personalization",
+      "detailedDescription": "Windows sammelt Daten über Ihre Tastatureingaben und Handschrift, um die Autokorrektur und Worterkennung zu verbessern. Diese Daten können sensible Informationen wie Passwörter, persönliche Nachrichten und vertrauliche Dokumente enthalten.",
+      "impact": "Tastatur-Vorhersagen funktionieren weiterhin, aber werden nicht mehr 'gelernt'. Die Touch-Tastatur und Handschrifterkennung arbeiten mit Standardwörterbüchern.",
+      "recommendation": "Empfohlen für sicherheitsbewusste Nutzer. Besonders wichtig, wenn Sie sensible Daten eingeben.",
+      "affectedComponents": ["Touch Keyboard Learning", "Handwriting Recognition", "SwiftKey Integration"],
+      "isReversible": true,
+      "supportedVersions": ["Windows10", "Windows11"],
+      "functions": {
+        "test": "Test-DisableTypingData",
+        "set": "Set-DisableTypingData",
+        "undo": "Undo-DisableTypingData"
+      }
+    },
+    {
+      "id": "disable_app_launch_tracking",
+      "name": "Disable App Launch Tracking",
+      "category": "Privacy",
+      "risk": "Safe",
+      "description": "Disables tracking of launched apps for Start Menu suggestions",
+      "detailedDescription": "Windows protokolliert jede App, die Sie starten, wann und wie oft. Diese Daten werden für das 'Häufig verwendet' Feature im Startmenü genutzt. Bei aktivierter Telemetrie werden diese Daten auch an Microsoft gesendet.",
+      "impact": "Das Startmenü zeigt keine 'Häufig verwendet' Apps mehr. Ansonsten keine Auswirkungen auf die Systemnutzung.",
+      "recommendation": "Empfohlen für Nutzer, die Privatsphäre schätzen. Falls Sie 'Häufig verwendet' nutzen, behalten Sie diese Funktion.",
+      "affectedComponents": ["Start Menu Most Used", "Jump Lists", "Recent Apps Tracking"],
+      "isReversible": true,
+      "supportedVersions": ["Windows10", "Windows11"],
+      "functions": {
+        "test": "Test-DisableAppLaunchTracking",
+        "set": "Set-DisableAppLaunchTracking",
+        "undo": "Undo-DisableAppLaunchTracking"
+      }
+    },
+    {
+      "id": "disable_windows_spotlight",
+      "name": "Disable Windows Spotlight",
+      "category": "Privacy",
+      "risk": "Safe",
+      "description": "Disables Windows Spotlight lock screen images and suggestions",
+      "detailedDescription": "Windows Spotlight lädt täglich neue Hintergrundbilder für Ihren Sperrbildschirm von Microsoft-Servern herunter. Dabei werden auch 'Tipps' und Werbung für Microsoft-Produkte angezeigt. Diese Funktion erfordert eine Internetverbindung und sendet Nutzungsdaten.",
+      "impact": "Der Sperrbildschirm zeigt Ihr gewähltes Hintergrundbild statt wechselnder Bilder. Keine Microsoft-Tipps mehr auf dem Sperrbildschirm. Leicht reduzierter Datenverbrauch.",
+      "recommendation": "Empfohlen, wenn Sie Werbung auf dem Sperrbildschirm stört oder Sie einen festen Hintergrund bevorzugen.",
+      "affectedComponents": ["Lock Screen", "Spotlight Images", "Lock Screen Tips"],
+      "isReversible": true,
+      "supportedVersions": ["Windows10", "Windows11"],
+      "functions": {
+        "test": "Test-DisableWindowsSpotlight",
+        "set": "Set-DisableWindowsSpotlight",
+        "undo": "Undo-DisableWindowsSpotlight"
+      }
+    },
+    {
+      "id": "disable_cortana",
+      "name": "Disable Cortana",
+      "category": "Privacy",
+      "risk": "Safe",
+      "description": "Disables Cortana and web search integration",
+      "detailedDescription": "Cortana ist Microsofts Sprachassistent, der im Hintergrund läuft und Suchanfragen an Microsoft sendet. Auch wenn Sie Cortana nie nutzen, sammelt der Dienst Daten und verbraucht Systemressourcen. Dieser Tweak deaktiviert Cortana vollständig.",
+      "impact": "Cortana-Funktionen sind nicht mehr verfügbar. Die Windows-Suche funktioniert weiterhin für lokale Dateien. Web-Suche im Startmenü wird deaktiviert. Reduzierter RAM-Verbrauch.",
+      "recommendation": "Empfohlen für alle, die Cortana nicht aktiv nutzen. Die meisten Nutzer werden keinen Unterschied bemerken.",
+      "affectedComponents": ["Cortana Service", "Windows Search Web Integration", "Voice Assistant"],
+      "isReversible": true,
+      "supportedVersions": ["Windows10", "Windows11"],
+      "functions": {
+        "test": "Test-DisableCortana",
+        "set": "Set-DisableCortana",
+        "undo": "Undo-DisableCortana"
+      }
+    },
+    {
+      "id": "optimize_visual_effects",
+      "name": "Optimize Visual Effects",
+      "category": "Performance",
+      "risk": "Safe",
+      "description": "Disables unnecessary visual effects for better performance",
+      "detailedDescription": "Windows verwendet zahlreiche visuelle Effekte wie Animationen beim Minimieren, Schatten unter Fenstern, transparente Taskleiste und sanftes Scrollen. Diese Effekte beanspruchen die GPU und können auf älteren Systemen zu Verzögerungen führen.",
+      "impact": "Spürbar schnellere Fensterreaktionen, besonders auf älteren PCs oder Systemen mit integrierter Grafik. Das System wirkt 'direkter' und reagiert schneller. Die Optik wird etwas schlichter.",
+      "recommendation": "Empfohlen für ältere PCs, Systeme ohne dedizierte GPU, oder wenn Sie maximale Reaktionsgeschwindigkeit bevorzugen. Gamer können leichte FPS-Verbesserungen sehen.",
+      "affectedComponents": ["Window Animations", "Taskbar Transparency", "Font Smoothing", "Shadow Effects"],
+      "isReversible": true,
+      "supportedVersions": ["Windows10", "Windows11"],
+      "functions": {
+        "test": "Test-OptimizeVisualEffects",
+        "set": "Set-OptimizeVisualEffects",
+        "undo": "Undo-OptimizeVisualEffects"
+      }
+    },
+    {
+      "id": "ultimate_performance_plan",
+      "name": "Ultimate Performance Power Plan",
+      "category": "Performance",
+      "risk": "Safe",
+      "description": "Enables the hidden Ultimate Performance power plan for maximum performance",
+      "detailedDescription": "Der 'Ultimate Performance' Energiesparplan ist ein verstecktes Windows-Feature, das ursprünglich für Workstations entwickelt wurde. Er eliminiert Mikro-Latenzen durch aggressive Leistungseinstellungen: CPU läuft auf Höchstleistung, keine Festplatten-Abschaltung, maximale PCI-Express-Leistung.",
+      "impact": "Höherer Stromverbrauch und wärmere Komponenten. Beste Gaming-Performance und niedrigste Eingabeverzögerung. Nicht empfohlen für Laptops im Akkubetrieb.",
+      "recommendation": "Ideal für Desktop-Gaming-PCs und Workstations. Nicht für Laptops empfohlen, da die Akkulaufzeit drastisch sinkt.",
+      "affectedComponents": ["Power Management", "CPU Throttling", "PCI Express Power", "HDD/SSD Sleep"],
+      "isReversible": true,
+      "supportedVersions": ["Windows10", "Windows11"],
+      "functions": {
+        "test": "Test-UltimatePerformancePlan",
+        "set": "Set-UltimatePerformancePlan",
+        "undo": "Undo-UltimatePerformancePlan"
+      }
+    },
+    {
+      "id": "disable_unnecessary_services",
+      "name": "Disable Unnecessary Services",
+      "category": "Performance",
+      "risk": "Moderate",
+      "description": "Disables services that consume resources but provide minimal benefit",
+      "detailedDescription": "Windows startet standardmäßig viele Dienste, die die meisten Nutzer nie benötigen: Fax-Service, Xbox-Dienste auf Nicht-Gaming-PCs, Remote Registry, Druckwarteschlange ohne Drucker, etc. Dieser Tweak analysiert Ihre Konfiguration und deaktiviert nur sichere, unbenuzte Dienste.",
+      "impact": "Schnellerer Systemstart, weniger RAM-Verbrauch (100-300MB), weniger Hintergrundprozesse. Manche spezialisierten Funktionen könnten nicht mehr verfügbar sein.",
+      "recommendation": "Empfohlen für fortgeschrittene Nutzer. Prüfen Sie die Liste der deaktivierten Dienste. Kann bei Bedarf rückgängig gemacht werden.",
+      "affectedComponents": ["Windows Services", "Background Processes", "Startup Time"],
+      "isReversible": true,
+      "supportedVersions": ["Windows10", "Windows11"],
+      "functions": {
+        "test": "Test-DisableUnnecessaryServices",
+        "set": "Set-DisableUnnecessaryServices",
+        "undo": "Undo-DisableUnnecessaryServices"
+      }
+    },
+    {
+      "id": "disable_background_apps",
+      "name": "Disable Background Apps",
+      "category": "Performance",
+      "risk": "Safe",
+      "description": "Prevents apps from running in the background",
+      "detailedDescription": "UWP-Apps (Store-Apps) können im Hintergrund laufen, auch wenn Sie sie nicht nutzen. Sie aktualisieren Live-Kacheln, empfangen Benachrichtigungen und verbrauchen CPU, RAM und Netzwerk-Bandbreite. Dieser Tweak verhindert, dass Apps ohne Ihre aktive Nutzung laufen.",
+      "impact": "Weniger RAM- und CPU-Verbrauch. Apps starten etwas langsamer beim ersten Öffnen. Push-Benachrichtigungen funktionieren möglicherweise verzögert.",
+      "recommendation": "Empfohlen für die meisten Nutzer. Falls Sie auf sofortige Benachrichtigungen angewiesen sind (z.B. Messaging-Apps), sollten Sie diese individuell in den Einstellungen aktivieren.",
+      "affectedComponents": ["UWP Apps", "Store Apps", "Live Tiles", "Push Notifications"],
+      "isReversible": true,
+      "supportedVersions": ["Windows10", "Windows11"],
+      "functions": {
+        "test": "Test-DisableBackgroundApps",
+        "set": "Set-DisableBackgroundApps",
+        "undo": "Undo-DisableBackgroundApps"
+      }
+    },
+    {
+      "id": "optimize_gaming",
+      "name": "Optimize Gaming Performance",
+      "category": "Performance",
+      "risk": "Safe",
+      "description": "Disables Game DVR recording to prevent FPS drops, keeps Game Mode enabled",
+      "detailedDescription": "Game DVR zeichnet im Hintergrund ständig die letzten Minuten Ihres Spiels auf, falls Sie einen Clip speichern möchten. Dies verursacht messbare FPS-Einbußen (5-15%) und erhöht die Eingabeverzögerung. Der Game Mode bleibt aktiviert, da er tatsächlich hilft.",
+      "impact": "Höhere und stabilere FPS in Spielen. Niedrigere Eingabeverzögerung. Sie können keine 'Letzte 30 Sekunden aufnehmen'-Funktion mehr nutzen (nutzen Sie stattdessen OBS, NVIDIA ShadowPlay oder AMD ReLive).",
+      "recommendation": "Unbedingt empfohlen für alle Gamer. OBS oder GeForce Experience bieten bessere Aufnahmequalität ohne Performance-Einbußen.",
+      "affectedComponents": ["Game DVR", "Xbox Game Bar Recording", "Background Recording"],
+      "isReversible": true,
+      "supportedVersions": ["Windows10", "Windows11"],
+      "functions": {
+        "test": "Test-OptimizeGaming",
+        "set": "Set-OptimizeGaming",
+        "undo": "Undo-OptimizeGaming"
+      }
+    },
+    {
+      "id": "disable_scheduled_tasks",
+      "name": "Disable Telemetry Tasks",
+      "category": "Performance",
+      "risk": "Safe",
+      "description": "Disables scheduled tasks related to telemetry and diagnostics",
+      "detailedDescription": "Windows führt regelmäßig geplante Aufgaben aus, die Telemetriedaten sammeln, Kompatibilitätsprüfungen durchführen und 'Customer Experience Improvement'-Daten senden. Diese Tasks laufen oft während der PC-Nutzung und können kurze Verzögerungen verursachen.",
+      "impact": "Weniger Hintergrundaktivität, besonders in Ruhephasen. Keine plötzlichen CPU-Spitzen durch Diagnostik-Tasks. Der Aufgabenplaner funktioniert weiterhin für Ihre eigenen Tasks.",
+      "recommendation": "Empfohlen für alle Nutzer. Diese Tasks bieten dem Endnutzer keinen Vorteil.",
+      "affectedComponents": ["Task Scheduler", "Telemetry Tasks", "Compatibility Appraiser", "CEIP Tasks"],
+      "isReversible": true,
+      "supportedVersions": ["Windows10", "Windows11"],
+      "functions": {
+        "test": "Test-DisableScheduledTasks",
+        "set": "Set-DisableScheduledTasks",
+        "undo": "Undo-DisableScheduledTasks"
+      }
+    },
+    {
+      "id": "optimize_memory",
+      "name": "Optimize Memory",
+      "category": "Performance",
+      "risk": "Moderate",
+      "description": "Applies memory optimization settings for systems with 16GB+ RAM",
+      "detailedDescription": "Windows verwaltet den Arbeitsspeicher konservativ, um auf älteren Systemen mit wenig RAM stabil zu laufen. Bei modernen Systemen mit 16GB+ RAM kann man aggressivere Einstellungen nutzen: größerer Dateisystem-Cache, weniger Auslagerung auf die Festplatte, optimierte Prefetch-Einstellungen.",
+      "impact": "Schnelleres Laden von Anwendungen und Dateien. Weniger Festplattenaktivität. Auf Systemen mit weniger als 16GB RAM könnte es zu Stabilitätsproblemen kommen.",
+      "recommendation": "Nur für Systeme mit mindestens 16GB RAM empfohlen. Bei 8GB oder weniger sollten Sie diesen Tweak vermeiden.",
+      "affectedComponents": ["Memory Manager", "File System Cache", "Prefetch", "SuperFetch"],
+      "isReversible": true,
+      "supportedVersions": ["Windows10", "Windows11"],
+      "functions": {
+        "test": "Test-OptimizeMemory",
+        "set": "Set-OptimizeMemory",
+        "undo": "Undo-OptimizeMemory"
+      }
+    },
+    {
+      "id": "disable_fast_startup",
+      "name": "Disable Fast Startup",
+      "category": "Performance",
+      "risk": "Safe",
+      "description": "Disables Fast Startup for cleaner shutdown/startup cycle",
+      "supportedVersions": ["Windows10", "Windows11"],
+      "functions": {
+        "test": "Test-DisableFastStartup",
+        "set": "Set-DisableFastStartup",
+        "undo": "Undo-DisableFastStartup"
+      }
+    },
+    {
+      "id": "configure_windows_update",
+      "name": "Configure Windows Update",
+      "category": "Security",
+      "risk": "Safe",
+      "description": "Configures Windows Update for user control without disabling updates",
+      "supportedVersions": ["Windows10", "Windows11"],
+      "functions": {
+        "test": "Test-ConfigureWindowsUpdate",
+        "set": "Set-ConfigureWindowsUpdate",
+        "undo": "Undo-ConfigureWindowsUpdate"
+      }
+    },
+    {
+      "id": "ensure_defender_enabled",
+      "name": "Ensure Defender Protection",
+      "category": "Security",
+      "risk": "Safe",
+      "description": "Ensures Windows Defender is enabled with recommended security settings",
+      "supportedVersions": ["Windows10", "Windows11"],
+      "functions": {
+        "test": "Test-EnsureDefenderEnabled",
+        "set": "Set-EnsureDefenderEnabled",
+        "undo": "Undo-EnsureDefenderEnabled"
+      }
+    },
+    {
+      "id": "configure_smartscreen",
+      "name": "Configure SmartScreen",
+      "category": "Security",
+      "risk": "Safe",
+      "description": "Ensures SmartScreen protection is enabled",
+      "supportedVersions": ["Windows10", "Windows11"],
+      "functions": {
+        "test": "Test-ConfigureSmartScreen",
+        "set": "Set-ConfigureSmartScreen",
+        "undo": "Undo-ConfigureSmartScreen"
+      }
+    },
+    {
+      "id": "configure_uac",
+      "name": "Configure UAC",
+      "category": "Security",
+      "risk": "Safe",
+      "description": "Configures User Account Control for security with less annoyance",
+      "supportedVersions": ["Windows10", "Windows11"],
+      "functions": {
+        "test": "Test-ConfigureUAC",
+        "set": "Set-ConfigureUAC",
+        "undo": "Undo-ConfigureUAC"
+      }
+    },
+    {
+      "id": "disable_remote_desktop",
+      "name": "Disable Remote Desktop",
+      "category": "Security",
+      "risk": "Safe",
+      "description": "Disables Remote Desktop for improved security",
+      "supportedVersions": ["Windows10", "Windows11"],
+      "functions": {
+        "test": "Test-DisableRemoteDesktop",
+        "set": "Set-DisableRemoteDesktop",
+        "undo": "Undo-DisableRemoteDesktop"
+      }
+    },
+    {
+      "id": "disable_remote_assistance",
+      "name": "Disable Remote Assistance",
+      "category": "Security",
+      "risk": "Safe",
+      "description": "Disables Windows Remote Assistance",
+      "supportedVersions": ["Windows10", "Windows11"],
+      "functions": {
+        "test": "Test-DisableRemoteAssistance",
+        "set": "Set-DisableRemoteAssistance",
+        "undo": "Undo-DisableRemoteAssistance"
+      }
+    },
+    {
+      "id": "disable_autoplay",
+      "name": "Disable AutoPlay",
+      "category": "Security",
+      "risk": "Safe",
+      "description": "Disables AutoPlay to prevent automatic execution from USB drives",
+      "supportedVersions": ["Windows10", "Windows11"],
+      "functions": {
+        "test": "Test-DisableAutoPlay",
+        "set": "Set-DisableAutoPlay",
+        "undo": "Undo-DisableAutoPlay"
+      }
+    },
+    {
+      "id": "enable_dns_over_https",
+      "name": "Enable DNS over HTTPS",
+      "category": "Security",
+      "risk": "Safe",
+      "description": "Enables encrypted DNS queries for improved privacy",
+      "supportedVersions": ["Windows10", "Windows11"],
+      "functions": {
+        "test": "Test-EnableDNSOverHTTPS",
+        "set": "Set-EnableDNSOverHTTPS",
+        "undo": "Undo-EnableDNSOverHTTPS"
+      }
+    },
+    {
+      "id": "remove_bloatware",
+      "name": "Remove Bloatware Apps",
+      "category": "Debloat",
+      "risk": "Safe",
+      "description": "Removes preinstalled third-party apps and unnecessary Microsoft apps",
+      "supportedVersions": ["Windows10", "Windows11"],
+      "functions": {
+        "test": "Test-RemoveBloatware",
+        "set": "Set-RemoveBloatware",
+        "undo": "Undo-RemoveBloatware"
+      }
+    },
+    {
+      "id": "remove_onedrive",
+      "name": "Remove OneDrive",
+      "category": "Debloat",
+      "risk": "Moderate",
+      "description": "Completely removes OneDrive from the system",
+      "supportedVersions": ["Windows10", "Windows11"],
+      "functions": {
+        "test": "Test-RemoveOneDrive",
+        "set": "Set-RemoveOneDrive",
+        "undo": "Undo-RemoveOneDrive"
+      }
+    },
+    {
+      "id": "disable_edge_features",
+      "name": "Disable Edge Features",
+      "category": "Debloat",
+      "risk": "Safe",
+      "description": "Disables Edge sidebar, shopping, and other annoyances",
+      "supportedVersions": ["Windows10", "Windows11"],
+      "functions": {
+        "test": "Test-DisableEdgeFeatures",
+        "set": "Set-DisableEdgeFeatures",
+        "undo": "Undo-DisableEdgeFeatures"
+      }
+    },
+    {
+      "id": "restore_classic_context_menu",
+      "name": "Restore Classic Context Menu",
+      "category": "Debloat",
+      "risk": "Safe",
+      "description": "Restores the classic Windows 10 right-click context menu in Windows 11",
+      "supportedVersions": ["Windows11"],
+      "functions": {
+        "test": "Test-RestoreClassicContextMenu",
+        "set": "Set-RestoreClassicContextMenu",
+        "undo": "Undo-RestoreClassicContextMenu"
+      }
+    },
+    {
+      "id": "disable_widgets",
+      "name": "Disable Widgets",
+      "category": "Debloat",
+      "risk": "Safe",
+      "description": "Disables Windows Widgets and News/Interests from taskbar",
+      "supportedVersions": ["Windows10", "Windows11"],
+      "functions": {
+        "test": "Test-DisableWidgets",
+        "set": "Set-DisableWidgets",
+        "undo": "Undo-DisableWidgets"
+      }
+    },
+
+    {
+      "id": "dns_cloudflare",
+      "name": "Set DNS to Cloudflare",
+      "category": "Network",
+      "risk": "Safe",
+      "description": "Sets DNS servers to Cloudflare (1.1.1.1) for faster and more private browsing",
+      "detailedDescription": "Cloudflare DNS is one of the fastest public DNS services. It provides enhanced privacy as Cloudflare doesn't sell your data and purges logs every 24 hours.",
+      "impact": "Faster DNS resolution, improved privacy. May need to be reapplied after network changes.",
+      "recommendation": "Recommended for most users who want faster and more private DNS.",
+      "affectedComponents": ["Network Adapter DNS Settings"],
+      "isReversible": true,
+      "supportedVersions": ["Windows10", "Windows11"],
+      "functions": {
+        "test": "Test-DnsCloudflare",
+        "set": "Set-DnsCloudflare",
+        "undo": "Undo-DnsCloudflare"
+      }
+    },
+    {
+      "id": "dns_google",
+      "name": "Set DNS to Google",
+      "category": "Network",
+      "risk": "Safe",
+      "description": "Sets DNS servers to Google (8.8.8.8) for reliable and fast DNS resolution",
+      "detailedDescription": "Google Public DNS is a reliable and fast DNS service. While it provides good performance, Google may collect some anonymized data.",
+      "impact": "Reliable DNS resolution with global infrastructure. Good for gaming and streaming.",
+      "recommendation": "Good for users who prioritize reliability and speed over maximum privacy.",
+      "affectedComponents": ["Network Adapter DNS Settings"],
+      "isReversible": true,
+      "supportedVersions": ["Windows10", "Windows11"],
+      "functions": {
+        "test": "Test-DnsGoogle",
+        "set": "Set-DnsGoogle",
+        "undo": "Undo-DnsGoogle"
+      }
+    },
+    {
+      "id": "dns_quad9",
+      "name": "Set DNS to Quad9",
+      "category": "Network",
+      "risk": "Safe",
+      "description": "Sets DNS servers to Quad9 (9.9.9.9) for security-focused DNS with malware blocking",
+      "detailedDescription": "Quad9 is a security-focused DNS service that blocks known malicious domains. It's operated by a non-profit and doesn't log your queries.",
+      "impact": "Blocks access to known malware and phishing sites. Enhanced security with privacy protection.",
+      "recommendation": "Best for security-conscious users who want built-in malware protection.",
+      "affectedComponents": ["Network Adapter DNS Settings"],
+      "isReversible": true,
+      "supportedVersions": ["Windows10", "Windows11"],
+      "functions": {
+        "test": "Test-DnsQuad9",
+        "set": "Set-DnsQuad9",
+        "undo": "Undo-DnsQuad9"
+      }
+    },
+    {
+      "id": "dns_auto",
+      "name": "Set DNS to Automatic (DHCP)",
+      "category": "Network",
+      "risk": "Safe",
+      "description": "Resets DNS settings to automatic (DHCP) using your router's DNS servers",
+      "detailedDescription": "Reverts DNS settings to use the servers provided by your router or ISP. This is the default Windows behavior.",
+      "impact": "Uses your ISP's or router's DNS servers. May be slower or less private than public DNS.",
+      "recommendation": "Use only if you need to revert custom DNS settings or if custom DNS causes issues.",
+      "affectedComponents": ["Network Adapter DNS Settings"],
+      "isReversible": true,
+      "supportedVersions": ["Windows10", "Windows11"],
+      "functions": {
+        "test": "Test-DnsAuto",
+        "set": "Set-DnsAuto",
+        "undo": "Undo-DnsAuto"
+      }
+    },
+    {
+      "id": "optimize_tcpip",
+      "name": "Optimize TCP/IP Settings",
+      "category": "Network",
+      "risk": "Moderate",
+      "description": "Optimizes TCP/IP settings for better network performance and lower latency",
+      "detailedDescription": "Enables TCP Window Auto-Tuning, disables Nagle's Algorithm, and optimizes network throughput. These settings can improve gaming and streaming performance.",
+      "impact": "Lower network latency, potentially faster downloads. May not be compatible with all network configurations.",
+      "recommendation": "Recommended for gamers and power users. Test your connection after applying.",
+      "affectedComponents": ["TCP/IP Stack", "Network Performance"],
+      "isReversible": true,
+      "supportedVersions": ["Windows10", "Windows11"],
+      "functions": {
+        "test": "Test-OptimizeTcpIp",
+        "set": "Set-OptimizeTcpIp",
+        "undo": "Undo-OptimizeTcpIp"
+      }
+    },
+    {
+      "id": "reset_network",
+      "name": "Reset Network Adapter",
+      "category": "Network",
+      "risk": "Moderate",
+      "description": "Resets all network adapters and clears network caches (Winsock, DNS, IP)",
+      "detailedDescription": "Performs a complete network reset: flushes DNS cache, resets Winsock catalog, releases and renews IP addresses. Useful for fixing connectivity issues.",
+      "impact": "Temporarily disconnects network. Clears all cached network data. May require reconnecting to WiFi.",
+      "recommendation": "Use when experiencing network issues or after malware removal.",
+      "affectedComponents": ["Network Adapters", "DNS Cache", "Winsock Catalog", "IP Configuration"],
+      "isReversible": false,
+      "supportedVersions": ["Windows10", "Windows11"],
+      "functions": {
+        "test": "Test-ResetNetwork",
+        "set": "Set-ResetNetwork",
+        "undo": "Undo-ResetNetwork"
+      }
+    },
+
+    {
+      "id": "power_high_performance",
+      "name": "High Performance Power Plan",
+      "category": "Power",
+      "risk": "Safe",
+      "description": "Activates the High Performance power plan for maximum performance",
+      "detailedDescription": "Enables the Windows High Performance power plan which keeps the CPU at higher clock speeds and prevents aggressive power saving. Best for desktop PCs.",
+      "impact": "Higher power consumption, better performance. CPU runs at higher speeds constantly.",
+      "recommendation": "Recommended for desktops and gaming. Not recommended for laptops on battery.",
+      "affectedComponents": ["Power Plan", "CPU Power Management"],
+      "isReversible": true,
+      "supportedVersions": ["Windows10", "Windows11"],
+      "functions": {
+        "test": "Test-PowerHighPerformance",
+        "set": "Set-PowerHighPerformance",
+        "undo": "Undo-PowerHighPerformance"
+      }
+    },
+    {
+      "id": "power_balanced",
+      "name": "Balanced Power Plan",
+      "category": "Power",
+      "risk": "Safe",
+      "description": "Activates the Balanced power plan for optimal balance between performance and energy",
+      "detailedDescription": "Enables the Windows Balanced power plan which automatically adjusts CPU speed based on workload. Good balance for most users.",
+      "impact": "Adaptive power consumption. CPU scales up when needed and saves power when idle.",
+      "recommendation": "Recommended default for most users. Good for laptops and desktops.",
+      "affectedComponents": ["Power Plan", "CPU Power Management"],
+      "isReversible": true,
+      "supportedVersions": ["Windows10", "Windows11"],
+      "functions": {
+        "test": "Test-PowerBalanced",
+        "set": "Set-PowerBalanced",
+        "undo": "Undo-PowerBalanced"
+      }
+    },
+    {
+      "id": "power_ultimate",
+      "name": "Ultimate Performance Power Plan",
+      "category": "Power",
+      "risk": "Moderate",
+      "description": "Enables the hidden Ultimate Performance power plan for maximum throughput",
+      "detailedDescription": "Unlocks and activates the Ultimate Performance power plan. This is a hidden plan designed for workstations that eliminates micro-latencies in power management.",
+      "impact": "Maximum performance with highest power consumption. Disables all power-saving features.",
+      "recommendation": "For power users and workstations only. Significantly increases power consumption.",
+      "affectedComponents": ["Power Plan", "CPU Power Management", "All Power Saving Features"],
+      "isReversible": true,
+      "supportedVersions": ["Windows10", "Windows11"],
+      "functions": {
+        "test": "Test-PowerUltimate",
+        "set": "Set-PowerUltimate",
+        "undo": "Undo-PowerUltimate"
+      }
+    },
+    {
+      "id": "disable_hibernate",
+      "name": "Disable Hibernation",
+      "category": "Power",
+      "risk": "Safe",
+      "description": "Disables hibernation and removes hiberfil.sys to free up disk space",
+      "detailedDescription": "Hibernation saves your session to disk and powers off completely. Disabling it removes hiberfil.sys which can be several GB large, freeing up disk space.",
+      "impact": "Frees disk space equal to your RAM size. Cannot use hibernate or fast startup.",
+      "recommendation": "Recommended for SSDs to save space. Keep enabled if you use hibernate on laptops.",
+      "affectedComponents": ["Hibernation", "hiberfil.sys", "Fast Startup"],
+      "isReversible": true,
+      "supportedVersions": ["Windows10", "Windows11"],
+      "functions": {
+        "test": "Test-DisableHibernate",
+        "set": "Set-DisableHibernate",
+        "undo": "Undo-DisableHibernate"
+      }
+    },
+    {
+      "id": "disable_sleep",
+      "name": "Disable Sleep Mode",
+      "category": "Power",
+      "risk": "Safe",
+      "description": "Prevents the PC from automatically going to sleep",
+      "detailedDescription": "Disables automatic sleep when on AC power. The PC will stay on indefinitely. Useful for servers, media centers, or when running long tasks.",
+      "impact": "PC never sleeps automatically. Higher power consumption when idle.",
+      "recommendation": "For desktops that should stay on. Not recommended for laptops on battery.",
+      "affectedComponents": ["Sleep Timer", "Power Options"],
+      "isReversible": true,
+      "supportedVersions": ["Windows10", "Windows11"],
+      "functions": {
+        "test": "Test-DisableSleep",
+        "set": "Set-DisableSleep",
+        "undo": "Undo-DisableSleep"
+      }
+    },
+    {
+      "id": "disable_usb_suspend",
+      "name": "Disable USB Selective Suspend",
+      "category": "Power",
+      "risk": "Safe",
+      "description": "Prevents Windows from suspending USB devices to save power",
+      "detailedDescription": "USB Selective Suspend allows Windows to put individual USB ports into a low-power state. Disabling this prevents USB device disconnects and improves reliability.",
+      "impact": "Slightly higher power consumption. USB devices remain fully powered and responsive.",
+      "recommendation": "Recommended if you experience USB device disconnects or audio crackling.",
+      "affectedComponents": ["USB Power Management", "USB Hub Settings"],
+      "isReversible": true,
+      "supportedVersions": ["Windows10", "Windows11"],
+      "functions": {
+        "test": "Test-DisableUsbSuspend",
+        "set": "Set-DisableUsbSuspend",
+        "undo": "Undo-DisableUsbSuspend"
+      }
+    },
+    {
+      "id": "disable_wake_timers",
+      "name": "Disable Wake Timers",
+      "category": "Power",
+      "risk": "Safe",
+      "description": "Prevents scheduled tasks from waking the PC from sleep",
+      "detailedDescription": "Wake timers allow Windows and programs to wake your PC from sleep to run scheduled tasks like Windows Update. Disabling them keeps your PC asleep.",
+      "impact": "PC won't wake unexpectedly from sleep. Some scheduled tasks may be delayed.",
+      "recommendation": "Recommended if your PC wakes up unexpectedly during the night.",
+      "affectedComponents": ["Wake Timers", "Task Scheduler Wake Settings"],
+      "isReversible": true,
+      "supportedVersions": ["Windows10", "Windows11"],
+      "functions": {
+        "test": "Test-DisableWakeTimers",
+        "set": "Set-DisableWakeTimers",
+        "undo": "Undo-DisableWakeTimers"
+      }
+    },
+
+    {
+      "id": "clean_temp_files",
+      "name": "Clean Temporary Files",
+      "category": "Storage",
+      "risk": "Safe",
+      "description": "Removes temporary files from Windows and user temp folders",
+      "detailedDescription": "Cleans temporary files from %TEMP%, Windows\\Temp, and other temporary locations. These files are safe to delete and are recreated as needed by applications.",
+      "impact": "Frees up disk space immediately. No negative effects on system functionality. Apps recreate temp files as needed.",
+      "recommendation": "Safe to run regularly. Recommended monthly or when low on disk space.",
+      "affectedComponents": ["User Temp Folder", "Windows Temp Folder", "Temporary Internet Files"],
+      "isReversible": false,
+      "supportedVersions": ["Windows10", "Windows11"],
+      "functions": {
+        "test": "Test-CleanTempFiles",
+        "set": "Set-CleanTempFiles",
+        "undo": "Undo-CleanTempFiles"
+      }
+    },
+    {
+      "id": "clean_windows_update_cache",
+      "name": "Clean Windows Update Cache",
+      "category": "Storage",
+      "risk": "Moderate",
+      "description": "Clears the Windows Update download cache to free up disk space",
+      "detailedDescription": "Windows keeps downloaded updates in the SoftwareDistribution folder even after installation. This can grow to several GB over time. Clearing it forces Windows to re-download updates if needed.",
+      "impact": "Can free up several GB of disk space. Updates will need to be re-downloaded if not yet installed.",
+      "recommendation": "Safe to run after updates are installed. May cause temporary issues during active updates.",
+      "affectedComponents": ["SoftwareDistribution Folder", "Windows Update Service"],
+      "isReversible": false,
+      "supportedVersions": ["Windows10", "Windows11"],
+      "functions": {
+        "test": "Test-CleanWindowsUpdateCache",
+        "set": "Set-CleanWindowsUpdateCache",
+        "undo": "Undo-CleanWindowsUpdateCache"
+      }
+    },
+    {
+      "id": "disable_prefetch",
+      "name": "Disable Prefetch",
+      "category": "Storage",
+      "risk": "Moderate",
+      "description": "Disables Windows Prefetch to reduce disk writes on SSDs",
+      "detailedDescription": "Prefetch preloads frequently used applications into memory. On SSDs this provides minimal benefit but causes extra disk writes. Disabling it can extend SSD lifespan.",
+      "impact": "First app launch may be slightly slower. Reduces SSD wear. Frees up some disk space.",
+      "recommendation": "Recommended for SSDs only. Keep enabled on HDDs for faster app loading.",
+      "affectedComponents": ["Prefetch Service", "Prefetch Folder"],
+      "isReversible": true,
+      "supportedVersions": ["Windows10", "Windows11"],
+      "functions": {
+        "test": "Test-DisablePrefetch",
+        "set": "Set-DisablePrefetch",
+        "undo": "Undo-DisablePrefetch"
+      }
+    },
+    {
+      "id": "disable_superfetch",
+      "name": "Disable Superfetch (SysMain)",
+      "category": "Storage",
+      "risk": "Moderate",
+      "description": "Disables Superfetch/SysMain service to reduce disk activity",
+      "detailedDescription": "Superfetch (renamed SysMain in Windows 10) preloads apps you use frequently. On SSDs this can cause high disk usage with minimal benefit. It's designed for HDDs.",
+      "impact": "Reduces random disk I/O significantly. Apps may take slightly longer to start. Reduces SSD wear.",
+      "recommendation": "Recommended for SSDs. Keep enabled on HDDs for better performance.",
+      "affectedComponents": ["SysMain Service", "Memory Management"],
+      "isReversible": true,
+      "supportedVersions": ["Windows10", "Windows11"],
+      "functions": {
+        "test": "Test-DisableSuperfetch",
+        "set": "Set-DisableSuperfetch",
+        "undo": "Undo-DisableSuperfetch"
+      }
+    },
+    {
+      "id": "run_ssd_trim",
+      "name": "Run SSD TRIM",
+      "category": "Storage",
+      "risk": "Safe",
+      "description": "Manually runs TRIM optimization on all SSDs to maintain performance",
+      "detailedDescription": "TRIM tells the SSD which blocks are no longer in use, allowing the drive to optimize internal garbage collection. Windows runs this weekly, but you can trigger it manually.",
+      "impact": "Improves SSD performance and longevity. No data is deleted. Operation is fast.",
+      "recommendation": "Safe to run anytime. Windows does this automatically weekly. Run after large file deletions.",
+      "affectedComponents": ["SSD Controllers", "Storage Optimizer"],
+      "isReversible": false,
+      "supportedVersions": ["Windows10", "Windows11"],
+      "functions": {
+        "test": "Test-RunSsdTrim",
+        "set": "Set-RunSsdTrim",
+        "undo": "Undo-RunSsdTrim"
+      }
+    },
+    {
+      "id": "clean_recycle_bin",
+      "name": "Empty Recycle Bin",
+      "category": "Storage",
+      "risk": "Safe",
+      "description": "Empties the Recycle Bin to free up disk space",
+      "detailedDescription": "The Recycle Bin keeps deleted files until you empty it. These files still occupy disk space. This action permanently deletes all files in the Recycle Bin.",
+      "impact": "Frees disk space used by deleted files. Files cannot be recovered after emptying.",
+      "recommendation": "Safe to run when you're sure you don't need deleted files. Check Recycle Bin first.",
+      "affectedComponents": ["Recycle Bin", "All Drives"],
+      "isReversible": false,
+      "supportedVersions": ["Windows10", "Windows11"],
+      "functions": {
+        "test": "Test-CleanRecycleBin",
+        "set": "Set-CleanRecycleBin",
+        "undo": "Undo-CleanRecycleBin"
+      }
+    },
+    {
+      "id": "clean_thumbnails_cache",
+      "name": "Clean Thumbnails Cache",
+      "category": "Storage",
+      "risk": "Safe",
+      "description": "Clears the Explorer thumbnail cache to free up disk space",
+      "detailedDescription": "Windows caches thumbnails for images, videos, and documents in the Explorer thumbcache. Over time this can grow quite large. Thumbnails are regenerated as needed.",
+      "impact": "Frees disk space. First folder access may be slightly slower while thumbnails regenerate.",
+      "recommendation": "Safe to run regularly. Thumbnails are rebuilt automatically when viewing folders.",
+      "affectedComponents": ["Thumbcache", "Explorer Icon Cache"],
+      "isReversible": false,
+      "supportedVersions": ["Windows10", "Windows11"],
+      "functions": {
+        "test": "Test-CleanThumbnailsCache",
+        "set": "Set-CleanThumbnailsCache",
+        "undo": "Undo-CleanThumbnailsCache"
+      }
+    }
+  ]
+}

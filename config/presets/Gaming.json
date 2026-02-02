@@ -1,0 +1,21 @@
+{
+  "name": "Gaming",
+  "description": "Maximum performance for gaming. Disables all background processes and visual effects that can cause FPS drops.",
+  "version": "1.0.0",
+  "tweaks": [
+    "disable_telemetry",
+    "disable_advertising_id",
+    "disable_activity_history",
+    "disable_feedback",
+    "disable_tailored_experiences",
+    "optimize_visual_effects",
+    "ultimate_performance_plan",
+    "disable_unnecessary_services",
+    "disable_background_apps",
+    "optimize_gaming",
+    "disable_scheduled_tasks",
+    "disable_fast_startup",
+    "disable_widgets",
+    "disable_edge_features"
+  ]
+}

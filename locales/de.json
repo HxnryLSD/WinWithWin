@@ -1,0 +1,496 @@
+{
+  "meta": {
+    "language": "de",
+    "name": "Deutsch",
+    "version": "1.2.0"
+  },
+  "app": {
+    "title": "WinWithWin - Windows Optimierer",
+    "subtitle": "Tweaken wie ein Profi"
+  },
+  "categories": {
+    "all": "Alle Tweaks",
+    "favorites": "Favoriten",
+    "privacy": "Privatsphäre",
+    "performance": "Leistung",
+    "security": "Sicherheit",
+    "debloat": "Entbloaten",
+    "network": "Netzwerk",
+    "power": "Energie",
+    "storage": "Speicher"
+  },
+  "categoryDescriptions": {
+    "all": "Alle verfügbaren Tweaks durchsuchen und anwenden",
+    "favorites": "Deine Lieblings-Tweaks für schnellen Zugriff",
+    "privacy": "Telemetrie, Tracking und Datenerfassung kontrollieren",
+    "performance": "Systemgeschwindigkeit und Reaktionsfähigkeit optimieren",
+    "security": "Sicherheitseinstellungen des Systems härten",
+    "debloat": "Vorinstallierte Apps und Bloatware entfernen",
+    "network": "DNS, TCP/IP und Netzwerk-Optimierungen",
+    "power": "Energiesparpläne, Ruhezustand und Energieeinstellungen",
+    "storage": "Festplattenbereinigung, Temp-Dateien und SSD-Optimierung"
+  },
+  "sidebar": {
+    "categories": "KATEGORIEN",
+    "presets": "VORLAGEN",
+    "profiles": "PROFILE",
+    "tools": "WERKZEUGE",
+    "safety": "SICHERHEIT",
+    "settings": "EINSTELLUNGEN"
+  },
+  "presets": {
+    "balanced": "Ausgewogen",
+    "gaming": "Gaming",
+    "privacy": "Privatsphäre",
+    "minimal": "Minimal"
+  },
+  "buttons": {
+    "apply": "Anwenden",
+    "undo": "Rückgängig",
+    "applySelected": "Ausgewählte anwenden",
+    "undoAll": "Alle rückgängig",
+    "undoSelected": "Ausgewählte rückgängig",
+    "createRestorePoint": "Wiederherstellungspunkt erstellen",
+    "search": "Tweaks suchen...",
+    "exportProfile": "Profil exportieren",
+    "importProfile": "Profil importieren",
+    "viewHistory": "Verlauf anzeigen",
+    "scheduledTweaks": "Geplante Tweaks",
+    "showInfo": "Info anzeigen",
+    "hideInfo": "Info ausblenden"
+  },
+  "history": {
+    "title": "Tweak-Verlauf",
+    "noEntries": "Noch keine Verlaufseinträge."
+  },
+  "scheduler": {
+    "title": "Geplante Tweaks",
+    "noSchedules": "Keine geplanten Tweaks.\n\nVerwende das Kontextmenü eines Tweaks, um ihn zu planen.",
+    "header": "Geplante Tweaks:"
+  },
+  "status": {
+    "ready": "Bereit",
+    "loading": "Tweaks werden geladen...",
+    "checkingState": "Systemstatus wird geprüft...",
+    "loaded": "{count} Tweaks geladen ({applied} bereits angewendet)",
+    "applying": "{name} wird angewendet...",
+    "undoing": "{name} wird rückgängig gemacht...",
+    "applySuccess": "{name} erfolgreich angewendet",
+    "undoSuccess": "{name} erfolgreich rückgängig gemacht",
+    "applyFailed": "{name} konnte nicht angewendet werden",
+    "undoFailed": "{name} konnte nicht rückgängig gemacht werden",
+    "error": "Fehler: {message}",
+    "restorePointCreating": "Wiederherstellungspunkt wird erstellt...",
+    "restorePointSuccess": "Wiederherstellungspunkt erfolgreich erstellt",
+    "restorePointFailed": "Wiederherstellungspunkt konnte nicht erstellt werden",
+    "presetApplying": "{preset}-Vorlage wird angewendet...",
+    "presetSuccess": "{preset}-Vorlage erfolgreich angewendet",
+    "presetPartialFail": "Einige Tweaks konnten nicht angewendet werden",
+    "appliedCount": "{success} von {total} Tweak(s) angewendet",
+    "undoneCount": "{success} von {total} Tweaks rückgängig gemacht",
+    "profileExported": "Profil exportiert: {count} Tweaks",
+    "profileApplied": "Profil angewendet: {success} von {total} Tweaks",
+    "exportFailed": "Profil konnte nicht exportiert werden",
+    "themeFailed": "Design konnte nicht angewendet werden: {message}",
+    "loadError": "Fehler beim Laden der Tweaks: {message}"
+  },
+  "dialogs": {
+    "adminRequired": {
+      "title": "Administrator erforderlich",
+      "message": "WinWithWin benötigt Administratorrechte um Tweaks anzuwenden.\n\nMöchten Sie als Administrator neu starten?"
+    },
+    "applyPreset": {
+      "title": "Vorlage anwenden",
+      "message": "Die '{preset}'-Vorlage anwenden?\n\nVorher wird ein Wiederherstellungspunkt erstellt."
+    },
+    "applySelected": {
+      "title": "Ausgewählte Tweaks anwenden",
+      "message": "{count} ausgewählte Tweak(s) anwenden?\n\nVorher wird ein Wiederherstellungspunkt erstellt."
+    },
+    "undoAll": {
+      "title": "Alle Tweaks rückgängig",
+      "message": "Alle {count} angewendeten Tweaks rückgängig machen?"
+    },
+    "undoSelected": {
+      "title": "Ausgewählte Tweaks rückgängig",
+      "message": "{count} ausgewählte angewendete Tweak(s) rückgängig machen?"
+    },
+    "noTweaksSelected": {
+      "title": "Info",
+      "message": "Keine Tweaks zum Anwenden ausgewählt."
+    },
+    "allAlreadyApplied": {
+      "title": "Info",
+      "message": "Alle ausgewählten Tweaks sind bereits angewendet."
+    },
+    "selectTweaksFirst": {
+      "title": "Info",
+      "message": "Keine Tweaks ausgewählt. Benutze die Checkboxen links, um Tweaks auszuwählen."
+    },
+    "noAppliedTweaks": {
+      "title": "Info",
+      "message": "Keine angewendeten Tweaks zum Rückgängigmachen."
+    },
+    "noAppliedToExport": {
+      "title": "Profil exportieren",
+      "message": "Keine angewendeten Tweaks zum Exportieren."
+    },
+    "noSelectedApplied": {
+      "title": "Info",
+      "message": "Keine ausgewählten angewendeten Tweaks zum Rückgängigmachen.\n\nWähle zuerst Tweaks mit den Checkboxen aus."
+    },
+    "importProfile": {
+      "title": "Profil importieren",
+      "message": "{count} Tweaks aus Profil '{name}' anwenden?\n\nVorher wird ein Wiederherstellungspunkt erstellt."
+    },
+    "invalidProfile": {
+      "title": "Fehler",
+      "message": "Profil konnte nicht geladen werden. Ungültiges Format."
+    },
+    "error": {
+      "title": "Fehler",
+      "message": "Ein Fehler ist aufgetreten: {message}"
+    },
+    "initError": {
+      "title": "WinWithWin Startfehler",
+      "message": "Anwendung konnte nicht initialisiert werden:\n\n{message}"
+    },
+    "loadError": {
+      "title": "Fehler",
+      "message": "Tweaks konnten nicht geladen werden: {message}"
+    },
+    "presetError": {
+      "title": "Fehler",
+      "message": "Vorlage konnte nicht angewendet werden: {message}"
+    },
+    "profileError": {
+      "title": "Fehler",
+      "message": "Profil konnte nicht exportiert werden."
+    }
+  },
+  "notifications": {
+    "languageChanged": {
+      "title": "Sprache geändert",
+      "message": "Sprache auf Deutsch geändert"
+    },
+    "tweakApplied": {
+      "title": "Tweak angewendet",
+      "message": "{name}"
+    },
+    "tweakUndone": {
+      "title": "Tweak rückgängig",
+      "message": "{name}"
+    },
+    "tweakFailed": {
+      "title": "Tweak fehlgeschlagen",
+      "message": "{name}"
+    },
+    "presetApplied": {
+      "title": "Vorlage angewendet",
+      "message": "{preset}-Vorlage wurde erfolgreich angewendet"
+    },
+    "tweaksApplied": {
+      "title": "Tweaks angewendet",
+      "message": "{count} Tweak(s) erfolgreich angewendet"
+    },
+    "profileExported": {
+      "title": "Profil exportiert",
+      "message": "{count} Tweaks in Profil gespeichert"
+    },
+    "profileImported": {
+      "title": "Profil importiert",
+      "message": "{count} Tweaks angewendet"
+    }
+  },
+  "risk": {
+    "safe": "Sicher",
+    "moderate": "Moderat",
+    "advanced": "Fortgeschritten"
+  },
+  "info": {
+    "impact": "Auswirkung",
+    "recommendation": "Empfehlung",
+    "affectedComponents": "Betroffene Komponenten",
+    "reversible": "Umkehrbar",
+    "yes": "Ja",
+    "no": "Nein"
+  },
+  "tweaks": {
+    "disable_telemetry": {
+      "name": "Telemetrie deaktivieren",
+      "description": "Deaktiviert Windows-Diagnosedatenerfassung und Telemetriedienste",
+      "detailedDescription": "Windows Telemetry sammelt kontinuierlich Daten über Ihre Systemnutzung, installierte Programme, Fehlermeldungen und Hardware-Konfiguration. Diese Daten werden an Microsoft-Server gesendet, um Windows zu verbessern. Dieser Tweak setzt die Telemetrie-Stufe auf 'Security' (minimal) und deaktiviert den DiagTrack-Dienst.",
+      "impact": "Reduziert den Netzwerk-Traffic und die CPU-Auslastung im Hintergrund. Microsoft erhält keine Nutzungsdaten mehr von Ihrem PC. Windows Updates funktionieren weiterhin normal.",
+      "recommendation": "Empfohlen für alle Nutzer, die Wert auf Privatsphäre legen. Hat keine negativen Auswirkungen auf die normale PC-Nutzung."
+    },
+    "disable_advertising_id": {
+      "name": "Werbe-ID deaktivieren",
+      "description": "Deaktiviert die Windows-Werbe-ID für zielgerichtete Werbung",
+      "detailedDescription": "Die Werbe-ID ist eine eindeutige Kennung, die Windows jeder Installation zuweist. Apps und Werbetreibende können diese ID nutzen, um Ihr Verhalten über verschiedene Apps hinweg zu verfolgen und personalisierte Werbung anzuzeigen. Dieser Tweak deaktiviert diese ID vollständig.",
+      "impact": "Sie sehen weniger personalisierte Werbung in Apps. Cross-App-Tracking wird verhindert. Keine Auswirkungen auf App-Funktionalität.",
+      "recommendation": "Unbedingt empfohlen für jeden Nutzer. Es gibt keinen Nachteil bei der Deaktivierung."
+    },
+    "disable_activity_history": {
+      "name": "Aktivitätsverlauf deaktivieren",
+      "description": "Deaktiviert den Windows-Aktivitätsverlauf und die Timeline-Funktion",
+      "detailedDescription": "Der Aktivitätsverlauf speichert alle Ihre Aktionen: geöffnete Dokumente, besuchte Websites, verwendete Apps. Diese Daten werden lokal gespeichert und optional mit Ihrem Microsoft-Konto synchronisiert. Die Timeline-Funktion (Win+Tab) nutzt diese Daten.",
+      "impact": "Die Timeline-Funktion zeigt keine vergangenen Aktivitäten mehr. Cortana kann keine aktivitätsbasierten Vorschläge machen. Kein Einfluss auf normale PC-Nutzung.",
+      "recommendation": "Empfohlen für privatsphärebewusste Nutzer. Falls Sie die Timeline nutzen, behalten Sie diese Funktion aktiviert."
+    },
+    "disable_location_tracking": {
+      "name": "Standortverfolgung deaktivieren",
+      "description": "Deaktiviert Windows-Standortdienste und -verfolgung",
+      "detailedDescription": "Windows kann Ihren Standort über GPS, WLAN-Netzwerke und IP-Adresse ermitteln. Diese Daten werden für Wetter-Apps, Karten und 'In der Nähe'-Funktionen genutzt, aber auch an Microsoft gesendet und im Standortverlauf gespeichert.",
+      "impact": "Apps können Ihren Standort nicht mehr automatisch abrufen. Wetter-Apps benötigen manuelle Standorteingabe. 'Mein Gerät finden' funktioniert nicht mehr.",
+      "recommendation": "Empfohlen für Desktop-PCs. Bei Laptops sollten Sie 'Mein Gerät finden' bedenken - nützlich bei Diebstahl."
+    },
+    "disable_feedback": {
+      "name": "Feedback-Anfragen deaktivieren",
+      "description": "Deaktiviert Windows-Feedback-Anfragen und -Benachrichtigungen",
+      "detailedDescription": "Windows fragt regelmäßig nach Feedback zu neuen Features und Ihrer Nutzungserfahrung. Diese Pop-ups erscheinen oft zu ungünstigen Zeitpunkten und unterbrechen Ihre Arbeit. Dieser Tweak deaktiviert alle Feedback-Anfragen von Microsoft.",
+      "impact": "Keine Feedback-Pop-ups mehr. Kein Einfluss auf Windows-Funktionalität. Microsoft erhält kein direktes Nutzerfeedback von Ihrem PC.",
+      "recommendation": "Empfohlen für alle Nutzer. Die Feedback-Funktion ist für normale Anwender nicht notwendig."
+    },
+    "disable_tailored_experiences": {
+      "name": "Maßgeschneiderte Erfahrungen deaktivieren",
+      "description": "Deaktiviert personalisierte Tipps basierend auf Diagnosedaten",
+      "detailedDescription": "Windows analysiert Ihre Diagnosedaten, um personalisierte Tipps, Werbung und Empfehlungen anzuzeigen. Dies umfasst Vorschläge im Startmenü, in den Einstellungen und auf dem Sperrbildschirm.",
+      "impact": "Keine personalisierten Tipps und Vorschläge mehr. Weniger zielgerichtete Werbung in Windows. Keine Auswirkungen auf die Funktionalität.",
+      "recommendation": "Empfohlen für alle Nutzer, die ein sauberes Windows-Erlebnis wünschen."
+    },
+    "disable_typing_data": {
+      "name": "Eingabedatenerfassung deaktivieren",
+      "description": "Deaktiviert die Erfassung von Tipp- und Freihanddaten",
+      "detailedDescription": "Windows sammelt Daten über Ihre Tipp- und Handschrift, um die Worterkennung und Autovervollständigung zu verbessern. Diese Daten werden lokal gespeichert und können mit Ihrem Microsoft-Konto synchronisiert werden.",
+      "impact": "Autovervollständigung und Tippvorschläge können mit der Zeit weniger genau werden. Keine Auswirkungen auf die Tastaturfunktionalität.",
+      "recommendation": "Empfohlen für privatsphärebewusste Nutzer. Das Tippen bleibt voll funktionsfähig."
+    },
+    "disable_app_launch_tracking": {
+      "name": "App-Startverfolgung deaktivieren",
+      "description": "Deaktiviert die Verfolgung gestarteter Apps für Startmenü-Vorschläge",
+      "detailedDescription": "Windows verfolgt, welche Apps Sie starten und wie oft, um das Startmenü zu optimieren und Vorschläge zu machen. Diese Daten werden für die 'Meistverwendet'-Liste verwendet.",
+      "impact": "'Meistverwendet'-Liste im Startmenü wird nicht aktualisiert. Keine Auswirkungen auf die App-Funktionalität.",
+      "recommendation": "Empfohlen, wenn Sie ein statisches Startmenü ohne nutzungsbasierte Vorschläge bevorzugen."
+    },
+    "disable_windows_spotlight": {
+      "name": "Windows-Blickpunkt deaktivieren",
+      "description": "Deaktiviert Sperrbildschirmbilder und Vorschläge von Windows-Blickpunkt",
+      "detailedDescription": "Windows Spotlight zeigt schöne Bilder auf Ihrem Sperrbildschirm, enthält aber auch Tipps, Tricks und Vorschläge. Es lädt Bilder im Hintergrund herunter und verfolgt, welche Bilder Ihnen gefallen.",
+      "impact": "Der Sperrbildschirm zeigt ein statisches Bild anstelle von wechselnden Bildern. Keine Tipps mehr auf dem Sperrbildschirm. Etwas weniger Bandbreitennutzung.",
+      "recommendation": "Empfohlen, wenn Sie einen einfachen Sperrbildschirm ohne Vorschläge bevorzugen."
+    },
+    "disable_cortana": {
+      "name": "Cortana deaktivieren",
+      "description": "Deaktiviert Cortana und die Websuche-Integration",
+      "detailedDescription": "Cortana ist Microsofts Sprachassistent, der in Windows integriert ist. Selbst wenn er nicht aktiv genutzt wird, läuft er im Hintergrund und kann Suchanfragen an Microsoft senden. Die Websuche im Startmenü nutzt ebenfalls Cortana.",
+      "impact": "Sprachbefehle funktionieren nicht mehr. Websuche im Startmenü ist deaktiviert. Lokale Datei- und App-Suche funktioniert weiterhin.",
+      "recommendation": "Empfohlen, wenn Sie Cortana nicht nutzen. Gibt Systemressourcen frei."
+    },
+    "optimize_visual_effects": {
+      "name": "Visuelle Effekte optimieren",
+      "description": "Deaktiviert unnötige visuelle Effekte für bessere Leistung",
+      "detailedDescription": "Windows enthält viele visuelle Effekte wie Animationen, Schatten und Transparenz. Obwohl sie schön aussehen, verbrauchen sie Systemressourcen. Dieser Tweak optimiert die Einstellungen für beste Leistung bei Beibehaltung wesentlicher Visualisierungen.",
+      "impact": "Schnappigere Fensteranimationen. Reduzierte GPU- und CPU-Auslastung. Etwas weniger poliertes visuelles Erscheinungsbild.",
+      "recommendation": "Empfohlen für ältere PCs oder leistungsorientierte Nutzer. High-End-Systeme bevorzugen möglicherweise die visuelle Qualität."
+    },
+    "disable_background_apps": {
+      "name": "Hintergrund-Apps deaktivieren",
+      "description": "Verhindert, dass Apps im Hintergrund laufen",
+      "detailedDescription": "Viele Windows-Apps laufen im Hintergrund weiter, auch wenn Sie sie schließen. Sie verbrauchen Speicher, CPU und Akku. Dieser Tweak verhindert, dass UWP-Apps im Hintergrund laufen.",
+      "impact": "Apps starten etwas langsamer (kein Vorladen). Reduzierter Speicher- und CPU-Verbrauch. Bessere Akkulaufzeit bei Laptops. Einige Apps senden möglicherweise keine Benachrichtigungen.",
+      "recommendation": "Empfohlen für die meisten Nutzer. Aktiviert lassen, wenn Sie auf App-Benachrichtigungen angewiesen sind."
+    },
+    "disable_game_dvr": {
+      "name": "Game DVR deaktivieren",
+      "description": "Deaktiviert Game DVR-Aufnahme um FPS-Einbrüche zu verhindern",
+      "detailedDescription": "Game DVR zeichnet ständig Gameplay im Hintergrund auf, damit Sie die letzten 30 Sekunden speichern können. Diese Funktion nutzt GPU-Ressourcen und kann Ruckler in Spielen verursachen, besonders auf schwächeren Systemen.",
+      "impact": "'Das aufnehmen'-Funktion nicht verfügbar. Hintergrundaufnahme deaktiviert. Verbesserte Gaming-Leistung und weniger Ruckler.",
+      "recommendation": "Sehr empfohlen für Gamer. Verwenden Sie dedizierte Aufnahmesoftware wie OBS, wenn nötig."
+    },
+    "disable_xbox_game_bar": {
+      "name": "Xbox Game Bar deaktivieren",
+      "description": "Deaktiviert Xbox Game Bar-Overlay für bessere Gaming-Leistung",
+      "detailedDescription": "Xbox Game Bar ist ein Overlay, das beim Drücken von Win+G in Spielen erscheint. Es bietet Widgets für Leistungsüberwachung, Aufnahme und soziale Funktionen. Es verbraucht jedoch Ressourcen und kann mit einigen Spielen interferieren.",
+      "impact": "Win+G-Tastenkombination öffnet keine Game Bar mehr. Xbox-Funktionen in Spielen deaktiviert. Etwas verbesserte Gaming-Leistung.",
+      "recommendation": "Empfohlen, wenn Sie Xbox-Funktionen nicht nutzen. Gamer, die Xbox-Sozialfunktionen nutzen, sollten es aktiviert lassen."
+    },
+    "disable_consumer_features": {
+      "name": "Konsumentenfunktionen deaktivieren",
+      "description": "Deaktiviert Windows-Konsumentenfunktionen wie App-Vorschläge",
+      "detailedDescription": "Windows enthält Konsumentenfunktionen, die Apps zur Installation vorschlagen, gesponserte Inhalte zeigen und Microsoft-Dienste bewerben. Dieser Tweak deaktiviert diese Werbeelemente.",
+      "impact": "Keine App-Vorschläge oder gesponserten Inhalte mehr. Saubereres Windows-Erlebnis. Keine Auswirkungen auf die Funktionalität.",
+      "recommendation": "Empfohlen für alle Nutzer, die ein sauberes, werbefreies Windows-Erlebnis wünschen."
+    },
+    "disable_suggested_apps": {
+      "name": "Vorgeschlagene Apps deaktivieren",
+      "description": "Deaktiviert vorgeschlagene Apps im Startmenü und in Einstellungen",
+      "detailedDescription": "Windows zeigt vorgeschlagene Apps im Startmenü und installiert gelegentlich Apps ohne zu fragen. Dieser Tweak verhindert diese Vorschläge und stillen Installationen.",
+      "impact": "Keine App-Vorschläge im Startmenü. Keine automatischen App-Installationen. Saubereres Startmenü.",
+      "recommendation": "Sehr empfohlen. Verhindert, dass unerwünschte Apps installiert werden."
+    },
+    "disable_tips_and_tricks": {
+      "name": "Tipps und Tricks deaktivieren",
+      "description": "Deaktiviert Windows-Tipps und Vorschlagsbenachrichtigungen",
+      "detailedDescription": "Windows zeigt Tipps, Tricks und Vorschläge durch Benachrichtigungen und in der Einstellungen-App. Obwohl manchmal hilfreich, können sie ablenkend und repetitiv sein.",
+      "impact": "Keine Tipp-Benachrichtigungen mehr. Saubererer Benachrichtigungsbereich. Etwas reduzierte Hintergrundaktivität.",
+      "recommendation": "Empfohlen für erfahrene Nutzer, die Windows gut kennen."
+    },
+    "disable_web_search": {
+      "name": "Websuche deaktivieren",
+      "description": "Deaktiviert Websuche in Windows-Suche und Startmenü",
+      "detailedDescription": "Wenn Sie im Startmenü suchen, sendet Windows Ihre Anfragen an Bing, um Webergebnisse anzuzeigen. Dieser Tweak deaktiviert die Websuche und macht die Startmenü-Suche nur lokal.",
+      "impact": "Schnellere Suchergebnisse (keine Web-Verzögerung). Keine Webergebnisse im Startmenü. Ihre Suchen bleiben privat.",
+      "recommendation": "Empfohlen für Privatsphäre und schnellere lokale Suche. Verwenden Sie den Browser für Websuchen."
+    },
+    "classic_context_menu": {
+      "name": "Klassisches Kontextmenü",
+      "description": "Stellt das klassische Windows 10 Rechtsklick-Kontextmenü in Windows 11 wieder her",
+      "detailedDescription": "Windows 11 führte ein vereinfachtes Kontextmenü mit weniger Optionen ein. Die klassischen Optionen sind hinter 'Weitere Optionen anzeigen' versteckt. Dieser Tweak stellt das vollständige klassische Menü direkt wieder her.",
+      "impact": "Vollständiges Kontextmenü erscheint sofort. Kein Klick auf 'Weitere Optionen anzeigen' nötig. Schnellerer Zugriff auf alle Menüpunkte.",
+      "recommendation": "Empfohlen für Nutzer, die das klassische Windows 10 Kontextmenü bevorzugen."
+    },
+
+    "dns_cloudflare": {
+      "name": "DNS auf Cloudflare setzen",
+      "description": "Setzt DNS-Server auf Cloudflare (1.1.1.1) für schnelleres und privateres Surfen",
+      "detailedDescription": "Cloudflare DNS ist einer der schnellsten öffentlichen DNS-Dienste. Er bietet verbesserte Privatsphäre, da Cloudflare Ihre Daten nicht verkauft und alle Protokolle alle 24 Stunden löscht. Die Server sind weltweit verteilt für optimale Geschwindigkeit.",
+      "impact": "Schnellere DNS-Auflösung, verbesserte Privatsphäre. Muss möglicherweise nach Netzwerkänderungen oder WLAN-Wechsel erneut angewendet werden.",
+      "recommendation": "Empfohlen für die meisten Nutzer, die schnellere und privatere DNS-Auflösung wünschen."
+    },
+    "dns_google": {
+      "name": "DNS auf Google setzen",
+      "description": "Setzt DNS-Server auf Google (8.8.8.8) für zuverlässige und schnelle DNS-Auflösung",
+      "detailedDescription": "Google Public DNS ist einer der zuverlässigsten und schnellsten DNS-Dienste weltweit. Er hat ausgezeichnete Verfügbarkeit und globale Infrastruktur. Bei guter Leistung sammelt Google möglicherweise einige anonymisierte Daten für Analysen.",
+      "impact": "Zuverlässige DNS-Auflösung mit exzellenter globaler Infrastruktur. Hervorragend für Gaming und Streaming.",
+      "recommendation": "Gut für Nutzer, die Zuverlässigkeit und Geschwindigkeit über maximale Privatsphäre stellen."
+    },
+    "dns_quad9": {
+      "name": "DNS auf Quad9 setzen",
+      "description": "Setzt DNS-Server auf Quad9 (9.9.9.9) für sicherheitsorientierten DNS mit Malware-Blockierung",
+      "detailedDescription": "Quad9 ist ein sicherheitsorientierter DNS-Dienst, der automatisch den Zugang zu bekannten bösartigen Domains blockiert. Er wird von einer gemeinnützigen Organisation betrieben und protokolliert Ihre Anfragen nicht. Ausgezeichnete Wahl für sicherheitsbewusste Nutzer.",
+      "impact": "Blockiert automatisch den Zugang zu bekannter Malware und Phishing-Seiten. Erhöhte Sicherheit mit starkem Datenschutz.",
+      "recommendation": "Am besten für sicherheitsbewusste Nutzer, die integrierten Malware-Schutz auf DNS-Ebene wünschen."
+    },
+    "dns_auto": {
+      "name": "DNS auf Automatisch (DHCP) setzen",
+      "description": "Setzt DNS-Einstellungen auf automatisch (DHCP) zurück und verwendet die DNS-Server Ihres Routers",
+      "detailedDescription": "Setzt DNS-Einstellungen zurück, um die von Ihrem Router oder ISP über DHCP bereitgestellten Server zu verwenden. Dies ist das Standard-Windows-Verhalten. Ihre DNS-Anfragen gehen durch die Server Ihres ISPs.",
+      "impact": "Verwendet die DNS-Server Ihres ISPs oder Routers. Kann langsamer oder weniger privat sein als öffentliche DNS-Alternativen.",
+      "recommendation": "Nur verwenden, wenn Sie benutzerdefinierte DNS-Einstellungen zurücksetzen müssen oder wenn benutzerdefinierte DNS Verbindungsprobleme verursacht."
+    },
+    "optimize_tcpip": {
+      "name": "TCP/IP-Einstellungen optimieren",
+      "description": "Optimiert TCP/IP-Einstellungen für bessere Netzwerkleistung und niedrigere Latenz",
+      "detailedDescription": "Aktiviert TCP Window Auto-Tuning, deaktiviert Nagle's Algorithmus zur Latenzreduzierung und optimiert Netzwerk-Drosselungseinstellungen. Diese Optimierungen können Gaming-Ping und Streaming-Qualität erheblich verbessern.",
+      "impact": "Niedrigere Netzwerklatenz, potenziell schnellere Down- und Uploads. Möglicherweise nicht mit allen Netzwerkkonfigurationen kompatibel.",
+      "recommendation": "Empfohlen für Gamer und Power-User. Testen Sie Ihre Verbindung nach dem Anwenden, um Kompatibilität sicherzustellen."
+    },
+    "reset_network": {
+      "name": "Netzwerkadapter zurücksetzen",
+      "description": "Setzt alle Netzwerkadapter zurück und löscht Netzwerk-Caches (Winsock, DNS, IP)",
+      "detailedDescription": "Führt einen vollständigen Netzwerk-Reset durch: leert DNS-Cache, setzt Winsock-Katalog zurück, gibt IP-Adressen frei und erneuert sie. Dies ist eine einmalige Aktion, nützlich zur Behebung von Verbindungsproblemen oder nach Malware-Entfernung.",
+      "impact": "Trennt vorübergehend das Netzwerk. Löscht alle zwischengespeicherten Netzwerkdaten. Sie müssen sich möglicherweise erneut mit WLAN-Netzwerken verbinden.",
+      "recommendation": "Verwenden bei Netzwerk-Verbindungsproblemen oder nach Entfernung von Malware. Erfordert erneutes Verbinden mit Netzwerken."
+    },
+
+    "power_high_performance": {
+      "name": "Höchstleistung Energiesparplan",
+      "description": "Aktiviert den Höchstleistungs-Energiesparplan für maximale Leistung",
+      "detailedDescription": "Aktiviert den Windows Höchstleistungs-Energiesparplan, der die CPU auf höheren Taktraten hält und aggressives Energiesparen verhindert. Der Prozessor läuft auch im Leerlauf mit maximaler Geschwindigkeit.",
+      "impact": "Höherer Stromverbrauch, maximale Leistung. CPU läuft konstant auf höheren Geschwindigkeiten. Nicht empfohlen für Laptops im Akkubetrieb.",
+      "recommendation": "Empfohlen für Desktops und Gaming-PCs. Verwenden Sie Ausgewogen für Laptops, um die Akkulaufzeit zu schonen."
+    },
+    "power_balanced": {
+      "name": "Ausgewogener Energiesparplan",
+      "description": "Aktiviert den ausgewogenen Energiesparplan für optimale Balance zwischen Leistung und Energie",
+      "detailedDescription": "Aktiviert den Windows Ausgewogen-Energiesparplan, der die CPU-Geschwindigkeit automatisch basierend auf der aktuellen Arbeitslast anpasst. Bietet gute Leistung bei Bedarf und spart Energie in Leerlaufzeiten.",
+      "impact": "Adaptiver Stromverbrauch. CPU skaliert bei Bedarf hoch und spart Energie im Leerlauf. Gute Balance für die meisten Nutzer.",
+      "recommendation": "Empfohlene Standardeinstellung für die meisten Nutzer. Beste Wahl für Laptops und allgemeine Desktop-Nutzung."
+    },
+    "power_ultimate": {
+      "name": "Ultimative Leistung Energiesparplan",
+      "description": "Aktiviert den versteckten Ultimative-Leistung-Energiesparplan für maximalen Durchsatz",
+      "detailedDescription": "Entsperrt und aktiviert den Ultimative-Leistung-Energiesparplan. Dieser versteckte Plan ist für Workstations konzipiert und eliminiert alle Mikro-Latenzen im Power-Management. Die CPU drosselt nie herunter.",
+      "impact": "Absolute Maximalleistung bei höchstem Stromverbrauch. Alle Energiesparfunktionen vollständig deaktiviert.",
+      "recommendation": "Nur für Power-User und Workstations. Erhöht den Stromverbrauch und die Wärmeentwicklung erheblich."
+    },
+    "disable_hibernate": {
+      "name": "Ruhezustand deaktivieren",
+      "description": "Deaktiviert den Ruhezustand und entfernt hiberfil.sys, um Speicherplatz freizugeben",
+      "detailedDescription": "Der Ruhezustand speichert Ihre gesamte Sitzung auf der Festplatte (hiberfil.sys) und schaltet komplett ab. Die hiberfil.sys-Datei kann mehrere Gigabyte groß sein. Das Deaktivieren entfernt diese Datei und gibt Speicherplatz frei.",
+      "impact": "Gibt Speicherplatz frei, der Ihrer RAM-Größe entspricht (z.B. 16GB RAM = 16GB frei). Ruhezustand und Windows Schnellstart können nicht verwendet werden.",
+      "recommendation": "Empfohlen für SSDs, um Platz zu sparen. Behalten Sie es aktiviert, wenn Sie den Ruhezustand regelmäßig auf Laptops nutzen."
+    },
+    "disable_sleep": {
+      "name": "Energiesparmodus deaktivieren",
+      "description": "Verhindert, dass der PC automatisch in den Energiesparmodus wechselt",
+      "detailedDescription": "Deaktiviert den automatischen Energiesparmodus bei Netzbetrieb. Der PC bleibt unbegrenzt eingeschaltet, bis er manuell in den Ruhezustand versetzt oder heruntergefahren wird. Nützlich für Server, Mediencenter oder lang laufende Aufgaben.",
+      "impact": "PC wechselt nie automatisch in den Energiesparmodus. Höherer Stromverbrauch im Leerlauf. Monitor schaltet sich weiterhin gemäß Einstellungen ab.",
+      "recommendation": "Für Desktops, die rund um die Uhr eingeschaltet bleiben sollen. Nicht empfohlen für Laptops im Akkubetrieb."
+    },
+    "disable_usb_suspend": {
+      "name": "USB-Energiesparmodus deaktivieren",
+      "description": "Verhindert, dass Windows USB-Geräte zur Energieeinsparung suspendiert",
+      "detailedDescription": "USB Selective Suspend ermöglicht Windows, einzelne USB-Ports in einen Energiesparzustand zu versetzen, wenn das angeschlossene Gerät im Leerlauf ist. Dies kann dazu führen, dass USB-Geräte unerwartet getrennt werden oder Audio-Knistern verursachen.",
+      "impact": "Etwas höherer Stromverbrauch. USB-Geräte bleiben vollständig mit Strom versorgt und reaktionsfähig. Behebt USB-Trennungsprobleme.",
+      "recommendation": "Empfohlen bei USB-Geräte-Trennungen, Audio-Knistern oder Peripherie-Problemen."
+    },
+    "disable_wake_timers": {
+      "name": "Aufweck-Timer deaktivieren",
+      "description": "Verhindert, dass geplante Aufgaben den PC aus dem Energiesparmodus aufwecken",
+      "detailedDescription": "Aufweck-Timer ermöglichen Windows und Programmen, Ihren PC aus dem Energiesparmodus aufzuwecken, um geplante Aufgaben wie Windows Update, Antivirenscans oder Backup-Jobs auszuführen. Das Deaktivieren hält Ihren PC im Schlaf, bis Sie ihn manuell aufwecken.",
+      "impact": "PC wacht nachts nicht mehr unerwartet auf. Einige geplante Aufgaben können bis zum nächsten Aufwachen verzögert werden.",
+      "recommendation": "Empfohlen, wenn Ihr PC nachts unerwartet aufwacht. Einige Updates können verzögert werden."
+    },
+
+    "clean_temp_files": {
+      "name": "Temporäre Dateien bereinigen",
+      "description": "Entfernt temporäre Dateien aus Windows- und Benutzer-Temp-Ordnern",
+      "detailedDescription": "Bereinigt temporäre Dateien aus %TEMP%, Windows\\Temp und anderen temporären Speicherorten. Diese Dateien können sicher gelöscht werden und werden bei Bedarf von Anwendungen neu erstellt.",
+      "impact": "Gibt sofort Speicherplatz frei. Keine negativen Auswirkungen auf die Systemfunktionalität. Apps erstellen Temp-Dateien bei Bedarf neu.",
+      "recommendation": "Sicher regelmäßig auszuführen. Monatlich oder bei wenig Speicherplatz empfohlen."
+    },
+    "clean_windows_update_cache": {
+      "name": "Windows Update Cache leeren",
+      "description": "Löscht den Windows Update Download-Cache, um Speicherplatz freizugeben",
+      "detailedDescription": "Windows behält heruntergeladene Updates im SoftwareDistribution-Ordner auch nach der Installation. Dies kann im Laufe der Zeit mehrere GB werden. Das Leeren zwingt Windows, Updates bei Bedarf erneut herunterzuladen.",
+      "impact": "Kann mehrere GB Speicherplatz freigeben. Updates müssen erneut heruntergeladen werden, wenn sie noch nicht installiert sind.",
+      "recommendation": "Sicher auszuführen, nachdem Updates installiert wurden. Kann während aktiver Updates vorübergehende Probleme verursachen."
+    },
+    "disable_prefetch": {
+      "name": "Prefetch deaktivieren",
+      "description": "Deaktiviert Windows Prefetch, um Schreibvorgänge auf SSDs zu reduzieren",
+      "detailedDescription": "Prefetch lädt häufig verwendete Anwendungen vorab in den Speicher. Bei SSDs bietet dies minimale Vorteile, verursacht aber zusätzliche Schreibvorgänge. Das Deaktivieren kann die SSD-Lebensdauer verlängern.",
+      "impact": "Erster App-Start kann etwas langsamer sein. Reduziert SSD-Verschleiß. Gibt etwas Speicherplatz frei.",
+      "recommendation": "Nur für SSDs empfohlen. Bei HDDs aktiviert lassen für schnelleres App-Laden."
+    },
+    "disable_superfetch": {
+      "name": "Superfetch (SysMain) deaktivieren",
+      "description": "Deaktiviert den Superfetch/SysMain-Dienst, um Festplattenaktivität zu reduzieren",
+      "detailedDescription": "Superfetch (in Windows 10 in SysMain umbenannt) lädt häufig verwendete Apps vorab. Bei SSDs kann dies hohe Festplattenauslastung mit minimalem Nutzen verursachen. Es wurde für HDDs konzipiert.",
+      "impact": "Reduziert zufällige Festplatten-I/O erheblich. Apps starten möglicherweise etwas langsamer. Reduziert SSD-Verschleiß.",
+      "recommendation": "Empfohlen für SSDs. Bei HDDs für bessere Leistung aktiviert lassen."
+    },
+    "run_ssd_trim": {
+      "name": "SSD TRIM ausführen",
+      "description": "Führt manuell TRIM-Optimierung auf allen SSDs aus, um die Leistung zu erhalten",
+      "detailedDescription": "TRIM teilt der SSD mit, welche Blöcke nicht mehr verwendet werden, sodass das Laufwerk die interne Speicherbereinigung optimieren kann. Windows führt dies wöchentlich aus, aber Sie können es manuell auslösen.",
+      "impact": "Verbessert SSD-Leistung und Langlebigkeit. Keine Daten werden gelöscht. Der Vorgang ist schnell.",
+      "recommendation": "Jederzeit sicher auszuführen. Windows macht dies automatisch wöchentlich. Nach großen Dateilöschungen ausführen."
+    },
+    "clean_recycle_bin": {
+      "name": "Papierkorb leeren",
+      "description": "Leert den Papierkorb, um Speicherplatz freizugeben",
+      "detailedDescription": "Der Papierkorb behält gelöschte Dateien, bis Sie ihn leeren. Diese Dateien belegen weiterhin Speicherplatz. Diese Aktion löscht dauerhaft alle Dateien im Papierkorb.",
+      "impact": "Gibt Speicherplatz frei, der von gelöschten Dateien verwendet wird. Dateien können nach dem Leeren nicht wiederhergestellt werden.",
+      "recommendation": "Sicher auszuführen, wenn Sie sicher sind, dass Sie gelöschte Dateien nicht benötigen. Prüfen Sie zuerst den Papierkorb."
+    },
+    "clean_thumbnails_cache": {
+      "name": "Miniaturansichten-Cache leeren",
+      "description": "Löscht den Explorer-Miniaturansichten-Cache, um Speicherplatz freizugeben",
+      "detailedDescription": "Windows speichert Miniaturansichten für Bilder, Videos und Dokumente im Explorer-Thumbcache. Im Laufe der Zeit kann dieser recht groß werden. Miniaturansichten werden bei Bedarf neu generiert.",
+      "impact": "Gibt Speicherplatz frei. Der erste Ordnerzugriff kann etwas langsamer sein, während Miniaturansichten neu generiert werden.",
+      "recommendation": "Sicher regelmäßig auszuführen. Miniaturansichten werden beim Anzeigen von Ordnern automatisch neu erstellt."
+    }
+  }
+}

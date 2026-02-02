@@ -1,0 +1,33 @@
+{
+  "name": "Minimal",
+  "description": "Aggressive debloating and optimization. Removes maximum bloatware and applies all performance tweaks.",
+  "version": "1.0.0",
+  "tweaks": [
+    "disable_telemetry",
+    "disable_advertising_id",
+    "disable_activity_history",
+    "disable_location_tracking",
+    "disable_feedback",
+    "disable_tailored_experiences",
+    "disable_typing_data",
+    "disable_app_launch_tracking",
+    "disable_windows_spotlight",
+    "disable_cortana",
+    "optimize_visual_effects",
+    "ultimate_performance_plan",
+    "disable_unnecessary_services",
+    "disable_background_apps",
+    "optimize_gaming",
+    "disable_scheduled_tasks",
+    "optimize_memory",
+    "disable_fast_startup",
+    "disable_remote_desktop",
+    "disable_remote_assistance",
+    "disable_autoplay",
+    "remove_bloatware",
+    "remove_onedrive",
+    "disable_edge_features",
+    "restore_classic_context_menu",
+    "disable_widgets"
+  ]
+}

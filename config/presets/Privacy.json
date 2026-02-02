@@ -1,0 +1,22 @@
+{
+  "name": "Privacy",
+  "description": "Maximum privacy protection. Disables all telemetry, tracking, and data collection features.",
+  "version": "1.0.0",
+  "tweaks": [
+    "disable_telemetry",
+    "disable_advertising_id",
+    "disable_activity_history",
+    "disable_location_tracking",
+    "disable_feedback",
+    "disable_tailored_experiences",
+    "disable_typing_data",
+    "disable_app_launch_tracking",
+    "disable_windows_spotlight",
+    "disable_cortana",
+    "disable_scheduled_tasks",
+    "disable_remote_desktop",
+    "disable_remote_assistance",
+    "enable_dns_over_https",
+    "disable_widgets"
+  ]
+}

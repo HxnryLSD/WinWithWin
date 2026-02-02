@@ -1,0 +1,496 @@
+{
+  "meta": {
+    "language": "en",
+    "name": "English",
+    "version": "1.2.0"
+  },
+  "app": {
+    "title": "WinWithWin - Windows Tweaker",
+    "subtitle": "Tweak like a pro"
+  },
+  "categories": {
+    "all": "All Tweaks",
+    "favorites": "Favorites",
+    "privacy": "Privacy",
+    "performance": "Performance",
+    "security": "Security",
+    "debloat": "Debloat",
+    "network": "Network",
+    "power": "Power",
+    "storage": "Storage"
+  },
+  "categoryDescriptions": {
+    "all": "Browse and apply all available tweaks",
+    "favorites": "Your favorite tweaks for quick access",
+    "privacy": "Control telemetry, tracking, and data collection",
+    "performance": "Optimize system speed and responsiveness",
+    "security": "Harden system security settings",
+    "debloat": "Remove preinstalled apps and bloatware",
+    "network": "DNS, TCP/IP, and network optimizations",
+    "power": "Power plans, sleep, and energy settings",
+    "storage": "Disk cleanup, temp files, and SSD optimization"
+  },
+  "sidebar": {
+    "categories": "CATEGORIES",
+    "presets": "PRESETS",
+    "profiles": "PROFILES",
+    "tools": "TOOLS",
+    "safety": "SAFETY",
+    "settings": "SETTINGS"
+  },
+  "presets": {
+    "balanced": "Balanced",
+    "gaming": "Gaming",
+    "privacy": "Privacy",
+    "minimal": "Minimal"
+  },
+  "buttons": {
+    "apply": "Apply",
+    "undo": "Undo",
+    "applySelected": "Apply Selected",
+    "undoAll": "Undo All",
+    "undoSelected": "Undo Selected",
+    "createRestorePoint": "Create Restore Point",
+    "search": "Search tweaks...",
+    "exportProfile": "Export Profile",
+    "importProfile": "Import Profile",
+    "viewHistory": "View History",
+    "scheduledTweaks": "Scheduled Tweaks",
+    "showInfo": "Show Info",
+    "hideInfo": "Hide Info"
+  },
+  "history": {
+    "title": "Tweak History",
+    "noEntries": "No history entries yet."
+  },
+  "scheduler": {
+    "title": "Scheduled Tweaks",
+    "noSchedules": "No scheduled tweaks.\n\nUse the context menu on a tweak to schedule it.",
+    "header": "Scheduled Tweaks:"
+  },
+  "status": {
+    "ready": "Ready",
+    "loading": "Loading tweaks...",
+    "checkingState": "Checking system state...",
+    "loaded": "Loaded {count} tweaks ({applied} already applied)",
+    "applying": "Applying {name}...",
+    "undoing": "Undoing {name}...",
+    "applySuccess": "Successfully applied {name}",
+    "undoSuccess": "Successfully undone {name}",
+    "applyFailed": "Failed to apply {name}",
+    "undoFailed": "Failed to undo {name}",
+    "error": "Error: {message}",
+    "restorePointCreating": "Creating restore point...",
+    "restorePointSuccess": "Restore point created successfully",
+    "restorePointFailed": "Failed to create restore point",
+    "presetApplying": "Applying {preset} preset...",
+    "presetSuccess": "Successfully applied {preset} preset",
+    "presetPartialFail": "Some tweaks failed to apply",
+    "appliedCount": "Applied {success} of {total} tweak(s)",
+    "undoneCount": "Undone {success} of {total} tweaks",
+    "profileExported": "Profile exported: {count} tweaks",
+    "profileApplied": "Profile applied: {success} of {total} tweaks",
+    "exportFailed": "Failed to export profile",
+    "themeFailed": "Failed to apply theme: {message}",
+    "loadError": "Error loading tweaks: {message}"
+  },
+  "dialogs": {
+    "adminRequired": {
+      "title": "Administrator Required",
+      "message": "WinWithWin requires administrator privileges to apply tweaks.\n\nDo you want to restart as administrator?"
+    },
+    "applyPreset": {
+      "title": "Apply Preset",
+      "message": "Apply the '{preset}' preset?\n\nThis will create a restore point first."
+    },
+    "applySelected": {
+      "title": "Apply Selected Tweaks",
+      "message": "Apply {count} selected tweak(s)?\n\nA restore point will be created first."
+    },
+    "undoAll": {
+      "title": "Undo All Tweaks",
+      "message": "Undo all {count} applied tweaks?"
+    },
+    "undoSelected": {
+      "title": "Undo Selected Tweaks",
+      "message": "Undo {count} selected applied tweak(s)?"
+    },
+    "noTweaksSelected": {
+      "title": "Info",
+      "message": "No tweaks selected to apply."
+    },
+    "allAlreadyApplied": {
+      "title": "Info",
+      "message": "All selected tweaks are already applied."
+    },
+    "selectTweaksFirst": {
+      "title": "Info",
+      "message": "No tweaks selected. Use the checkboxes on the left to select tweaks."
+    },
+    "noAppliedTweaks": {
+      "title": "Info",
+      "message": "No applied tweaks to undo."
+    },
+    "noAppliedToExport": {
+      "title": "Export Profile",
+      "message": "No applied tweaks to export."
+    },
+    "noSelectedApplied": {
+      "title": "Info",
+      "message": "No selected applied tweaks to undo.\n\nSelect tweaks using the checkboxes first."
+    },
+    "importProfile": {
+      "title": "Import Profile",
+      "message": "Apply {count} tweaks from profile '{name}'?\n\nA restore point will be created first."
+    },
+    "invalidProfile": {
+      "title": "Error",
+      "message": "Failed to load profile. Invalid format."
+    },
+    "error": {
+      "title": "Error",
+      "message": "An error occurred: {message}"
+    },
+    "initError": {
+      "title": "WinWithWin Startup Error",
+      "message": "Failed to initialize application:\n\n{message}"
+    },
+    "loadError": {
+      "title": "Error",
+      "message": "Failed to load tweaks: {message}"
+    },
+    "presetError": {
+      "title": "Error",
+      "message": "Failed to apply preset: {message}"
+    },
+    "profileError": {
+      "title": "Error",
+      "message": "Failed to export profile."
+    }
+  },
+  "notifications": {
+    "languageChanged": {
+      "title": "Language Changed",
+      "message": "Language changed to English"
+    },
+    "tweakApplied": {
+      "title": "Tweak Applied",
+      "message": "{name}"
+    },
+    "tweakUndone": {
+      "title": "Tweak Undone",
+      "message": "{name}"
+    },
+    "tweakFailed": {
+      "title": "Tweak Failed",
+      "message": "{name}"
+    },
+    "presetApplied": {
+      "title": "Preset Applied",
+      "message": "{preset} preset has been applied successfully"
+    },
+    "tweaksApplied": {
+      "title": "Tweaks Applied",
+      "message": "{count} tweak(s) applied successfully"
+    },
+    "profileExported": {
+      "title": "Profile Exported",
+      "message": "Saved {count} tweaks to profile"
+    },
+    "profileImported": {
+      "title": "Profile Imported",
+      "message": "Applied {count} tweaks"
+    }
+  },
+  "risk": {
+    "safe": "Safe",
+    "moderate": "Moderate",
+    "advanced": "Advanced"
+  },
+  "info": {
+    "impact": "Impact",
+    "recommendation": "Recommendation",
+    "affectedComponents": "Affected Components",
+    "reversible": "Reversible",
+    "yes": "Yes",
+    "no": "No"
+  },
+  "tweaks": {
+    "disable_telemetry": {
+      "name": "Disable Telemetry",
+      "description": "Disables Windows diagnostic data collection and telemetry services",
+      "detailedDescription": "Windows Telemetry continuously collects data about your system usage, installed programs, error messages, and hardware configuration. This data is sent to Microsoft servers to improve Windows. This tweak sets the telemetry level to 'Security' (minimal) and disables the DiagTrack service.",
+      "impact": "Reduces network traffic and background CPU usage. Microsoft will no longer receive usage data from your PC. Windows Updates continue to work normally.",
+      "recommendation": "Recommended for all users who value privacy. Has no negative effects on normal PC usage."
+    },
+    "disable_advertising_id": {
+      "name": "Disable Advertising ID",
+      "description": "Disables the Windows Advertising ID used for targeted ads",
+      "detailedDescription": "The Advertising ID is a unique identifier that Windows assigns to each installation. Apps and advertisers can use this ID to track your behavior across different apps and display personalized advertising. This tweak completely disables this ID.",
+      "impact": "You will see less personalized advertising in apps. Cross-app tracking is prevented. No effect on app functionality.",
+      "recommendation": "Highly recommended for every user. There is no downside to disabling this."
+    },
+    "disable_activity_history": {
+      "name": "Disable Activity History",
+      "description": "Disables Windows Activity History and Timeline feature",
+      "detailedDescription": "Activity History saves all your actions: opened documents, visited websites, used apps. This data is stored locally and optionally synced with your Microsoft account. The Timeline feature (Win+Tab) uses this data.",
+      "impact": "The Timeline feature will no longer show past activities. Cortana cannot make activity-based suggestions. No effect on normal PC usage.",
+      "recommendation": "Recommended for privacy-conscious users. If you use Timeline, keep this feature enabled."
+    },
+    "disable_location_tracking": {
+      "name": "Disable Location Tracking",
+      "description": "Disables Windows location services and tracking",
+      "detailedDescription": "Windows can determine your location via GPS, WiFi networks, and IP address. This data is used for weather apps, maps, and 'nearby' features, but is also sent to Microsoft and stored in location history.",
+      "impact": "Apps can no longer automatically retrieve your location. Weather apps require manual location entry. 'Find My Device' will no longer work.",
+      "recommendation": "Recommended for desktop PCs. For laptops, consider 'Find My Device' - useful in case of theft."
+    },
+    "disable_feedback": {
+      "name": "Disable Feedback Prompts",
+      "description": "Disables Windows feedback prompts and notifications",
+      "detailedDescription": "Windows regularly asks for feedback about new features and your usage experience. These pop-ups often appear at inconvenient times and interrupt your work. This tweak disables all Microsoft feedback requests.",
+      "impact": "No more feedback pop-ups. No effect on Windows functionality. Microsoft will not receive direct user feedback from your PC.",
+      "recommendation": "Recommended for all users. The feedback feature is not necessary for normal users."
+    },
+    "disable_tailored_experiences": {
+      "name": "Disable Tailored Experiences",
+      "description": "Disables personalized tips based on diagnostic data",
+      "detailedDescription": "Windows analyzes your diagnostic data to display personalized tips, ads, and recommendations. This includes suggestions in the Start menu, Settings app, and Lock screen.",
+      "impact": "No more personalized tips and suggestions. Less targeted advertising in Windows. No effect on functionality.",
+      "recommendation": "Recommended for all users who want a cleaner Windows experience."
+    },
+    "disable_typing_data": {
+      "name": "Disable Typing Data Collection",
+      "description": "Disables typing and inking data collection",
+      "detailedDescription": "Windows collects data about your typing and handwriting to improve word recognition and autocomplete. This data is stored locally and can be synced with your Microsoft account.",
+      "impact": "Autocomplete and typing suggestions may be less accurate over time. No effect on keyboard functionality.",
+      "recommendation": "Recommended for privacy-conscious users. Typing remains fully functional."
+    },
+    "disable_app_launch_tracking": {
+      "name": "Disable App Launch Tracking",
+      "description": "Disables tracking of launched apps for Start Menu suggestions",
+      "detailedDescription": "Windows tracks which apps you launch and how often to optimize the Start menu and provide suggestions. This data is used for 'Most Used' apps list.",
+      "impact": "'Most Used' apps list in Start menu will not update. No effect on app functionality.",
+      "recommendation": "Recommended if you prefer a static Start menu without usage-based suggestions."
+    },
+    "disable_windows_spotlight": {
+      "name": "Disable Windows Spotlight",
+      "description": "Disables Windows Spotlight lock screen images and suggestions",
+      "detailedDescription": "Windows Spotlight shows beautiful images on your lock screen but also includes tips, tricks, and suggestions. It downloads images in the background and tracks which images you like.",
+      "impact": "Lock screen will show a static image instead of rotating images. No more tips on lock screen. Slightly reduced bandwidth usage.",
+      "recommendation": "Recommended if you prefer a simple lock screen without suggestions."
+    },
+    "disable_cortana": {
+      "name": "Disable Cortana",
+      "description": "Disables Cortana and web search integration",
+      "detailedDescription": "Cortana is Microsoft's voice assistant integrated into Windows. Even when not actively used, it runs in the background and can send search queries to Microsoft. Web search in Start menu also uses Cortana.",
+      "impact": "Voice commands will not work. Web search in Start menu is disabled. Local file and app search still works.",
+      "recommendation": "Recommended if you don't use Cortana. Frees up system resources."
+    },
+    "optimize_visual_effects": {
+      "name": "Optimize Visual Effects",
+      "description": "Disables unnecessary visual effects for better performance",
+      "detailedDescription": "Windows includes many visual effects like animations, shadows, and transparency. While they look nice, they consume system resources. This tweak optimizes settings for best performance while keeping essential visuals.",
+      "impact": "Snappier window animations. Reduced GPU and CPU usage. Slightly less polished visual appearance.",
+      "recommendation": "Recommended for older PCs or performance-focused users. High-end systems may prefer visual quality."
+    },
+    "disable_background_apps": {
+      "name": "Disable Background Apps",
+      "description": "Prevents apps from running in the background",
+      "detailedDescription": "Many Windows apps continue running in the background even when you close them. They consume memory, CPU, and battery. This tweak prevents UWP apps from running in the background.",
+      "impact": "Apps start slightly slower (no preloading). Reduced memory and CPU usage. Better battery life on laptops. Some apps may not send notifications.",
+      "recommendation": "Recommended for most users. Keep enabled if you rely on app notifications."
+    },
+    "disable_game_dvr": {
+      "name": "Disable Game DVR",
+      "description": "Disables Game DVR recording to prevent FPS drops",
+      "detailedDescription": "Game DVR constantly records gameplay in the background so you can save the last 30 seconds. This feature uses GPU resources and can cause stuttering in games, especially on lower-end systems.",
+      "impact": "Cannot use 'Record that' feature. Background recording disabled. Improved gaming performance and reduced stuttering.",
+      "recommendation": "Highly recommended for gamers. Use dedicated recording software like OBS if needed."
+    },
+    "disable_xbox_game_bar": {
+      "name": "Disable Xbox Game Bar",
+      "description": "Disables Xbox Game Bar overlay for better gaming performance",
+      "detailedDescription": "Xbox Game Bar is an overlay that appears when pressing Win+G in games. It provides widgets for performance monitoring, capture, and social features. However, it consumes resources and can interfere with some games.",
+      "impact": "Win+G shortcut no longer opens Game Bar. Xbox features in games disabled. Slightly improved gaming performance.",
+      "recommendation": "Recommended if you don't use Xbox features. Gamers who use Xbox social features should keep it enabled."
+    },
+    "disable_consumer_features": {
+      "name": "Disable Consumer Features",
+      "description": "Disables Windows consumer features like app suggestions",
+      "detailedDescription": "Windows includes consumer features that suggest apps to install, show sponsored content, and promote Microsoft services. This tweak disables these promotional elements.",
+      "impact": "No more app suggestions or sponsored content. Cleaner Windows experience. No effect on functionality.",
+      "recommendation": "Recommended for all users who want a clean, ad-free Windows experience."
+    },
+    "disable_suggested_apps": {
+      "name": "Disable Suggested Apps",
+      "description": "Disables suggested apps in Start menu and Settings",
+      "detailedDescription": "Windows shows suggested apps in the Start menu and occasionally installs apps without asking. This tweak prevents these suggestions and silent installations.",
+      "impact": "No app suggestions in Start menu. No automatic app installations. Cleaner Start menu.",
+      "recommendation": "Highly recommended. Prevents unwanted apps from being installed."
+    },
+    "disable_tips_and_tricks": {
+      "name": "Disable Tips and Tricks",
+      "description": "Disables Windows tips and suggestions notifications",
+      "detailedDescription": "Windows shows tips, tricks, and suggestions through notifications and in the Settings app. While sometimes helpful, they can be distracting and repetitive.",
+      "impact": "No more tip notifications. Cleaner notification area. Slightly reduced background activity.",
+      "recommendation": "Recommended for experienced users who know Windows well."
+    },
+    "disable_web_search": {
+      "name": "Disable Web Search",
+      "description": "Disables web search in Windows Search and Start menu",
+      "detailedDescription": "When you search in the Start menu, Windows sends your queries to Bing to show web results. This tweak disables web search, making Start menu search local-only.",
+      "impact": "Faster search results (no web delay). No web results in Start menu. Your searches stay private.",
+      "recommendation": "Recommended for privacy and faster local search. Use browser for web searches."
+    },
+    "classic_context_menu": {
+      "name": "Classic Context Menu",
+      "description": "Restores the classic Windows 10 right-click context menu in Windows 11",
+      "detailedDescription": "Windows 11 introduced a simplified context menu with fewer options. The classic options are hidden behind 'Show more options'. This tweak restores the full classic menu directly.",
+      "impact": "Full context menu appears immediately. No need to click 'Show more options'. Faster access to all menu items.",
+      "recommendation": "Recommended for users who prefer the classic Windows 10 context menu."
+    },
+
+    "dns_cloudflare": {
+      "name": "Set DNS to Cloudflare",
+      "description": "Sets DNS servers to Cloudflare (1.1.1.1) for faster and more private browsing",
+      "detailedDescription": "Cloudflare DNS is one of the fastest public DNS services available. It provides enhanced privacy as Cloudflare doesn't sell your data and purges all logs every 24 hours. The servers are located worldwide for optimal speed.",
+      "impact": "Faster DNS resolution, improved privacy. May need to be reapplied after network changes or switching WiFi networks.",
+      "recommendation": "Recommended for most users who want faster and more private DNS resolution."
+    },
+    "dns_google": {
+      "name": "Set DNS to Google",
+      "description": "Sets DNS servers to Google (8.8.8.8) for reliable and fast DNS resolution",
+      "detailedDescription": "Google Public DNS is one of the most reliable and fastest DNS services globally. It has excellent uptime and global infrastructure. While it provides good performance, Google may collect some anonymized data for analytics.",
+      "impact": "Reliable DNS resolution with excellent global infrastructure. Great for gaming and streaming.",
+      "recommendation": "Good for users who prioritize reliability and speed over maximum privacy."
+    },
+    "dns_quad9": {
+      "name": "Set DNS to Quad9",
+      "description": "Sets DNS servers to Quad9 (9.9.9.9) for security-focused DNS with malware blocking",
+      "detailedDescription": "Quad9 is a security-focused DNS service that automatically blocks access to known malicious domains. It's operated by a non-profit organization and doesn't log your queries. Excellent choice for security-conscious users.",
+      "impact": "Blocks access to known malware and phishing sites automatically. Enhanced security with strong privacy protection.",
+      "recommendation": "Best for security-conscious users who want built-in malware protection at the DNS level."
+    },
+    "dns_auto": {
+      "name": "Set DNS to Automatic (DHCP)",
+      "description": "Resets DNS settings to automatic (DHCP) using your router's DNS servers",
+      "detailedDescription": "Reverts DNS settings to use the servers provided by your router or ISP via DHCP. This is the default Windows behavior. Your DNS queries will go through your ISP's servers.",
+      "impact": "Uses your ISP's or router's DNS servers. May be slower or less private than public DNS alternatives.",
+      "recommendation": "Use only if you need to revert custom DNS settings or if custom DNS causes connectivity issues."
+    },
+    "optimize_tcpip": {
+      "name": "Optimize TCP/IP Settings",
+      "description": "Optimizes TCP/IP settings for better network performance and lower latency",
+      "detailedDescription": "Enables TCP Window Auto-Tuning, disables Nagle's Algorithm to reduce latency, and optimizes network throttling settings. These optimizations can significantly improve gaming ping and streaming quality.",
+      "impact": "Lower network latency, potentially faster downloads and uploads. May not be compatible with all network configurations.",
+      "recommendation": "Recommended for gamers and power users. Test your connection after applying to ensure compatibility."
+    },
+    "reset_network": {
+      "name": "Reset Network Adapter",
+      "description": "Resets all network adapters and clears network caches (Winsock, DNS, IP)",
+      "detailedDescription": "Performs a complete network reset: flushes DNS cache, resets Winsock catalog, releases and renews IP addresses. This is a one-time action useful for fixing connectivity issues or after malware removal.",
+      "impact": "Temporarily disconnects network. Clears all cached network data. You may need to reconnect to WiFi networks.",
+      "recommendation": "Use when experiencing network connectivity issues or after removing malware. Requires reconnecting to networks."
+    },
+
+    "power_high_performance": {
+      "name": "High Performance Power Plan",
+      "description": "Activates the High Performance power plan for maximum performance",
+      "detailedDescription": "Enables the Windows High Performance power plan which keeps the CPU at higher clock speeds and prevents aggressive power saving. The processor runs at maximum speed even when idle.",
+      "impact": "Higher power consumption, maximum performance. CPU runs at higher speeds constantly. Not recommended for laptops on battery.",
+      "recommendation": "Recommended for desktops and gaming PCs. Use Balanced for laptops to preserve battery life."
+    },
+    "power_balanced": {
+      "name": "Balanced Power Plan",
+      "description": "Activates the Balanced power plan for optimal balance between performance and energy",
+      "detailedDescription": "Enables the Windows Balanced power plan which automatically adjusts CPU speed based on current workload. Provides good performance when needed while saving energy during idle periods.",
+      "impact": "Adaptive power consumption. CPU scales up when needed and saves power when idle. Good balance for most users.",
+      "recommendation": "Recommended default for most users. Best choice for laptops and general desktop use."
+    },
+    "power_ultimate": {
+      "name": "Ultimate Performance Power Plan",
+      "description": "Enables the hidden Ultimate Performance power plan for maximum throughput",
+      "detailedDescription": "Unlocks and activates the Ultimate Performance power plan. This hidden plan is designed for workstations and eliminates all micro-latencies in power management. The CPU never throttles down.",
+      "impact": "Absolute maximum performance with highest power consumption. All power-saving features completely disabled.",
+      "recommendation": "For power users and workstations only. Significantly increases power consumption and heat generation."
+    },
+    "disable_hibernate": {
+      "name": "Disable Hibernation",
+      "description": "Disables hibernation and removes hiberfil.sys to free up disk space",
+      "detailedDescription": "Hibernation saves your entire session to disk (hiberfil.sys) and powers off completely. The hiberfil.sys file can be several gigabytes large. Disabling hibernation removes this file and frees up disk space.",
+      "impact": "Frees disk space equal to your RAM size (e.g., 16GB RAM = 16GB freed). Cannot use hibernate or Windows Fast Startup.",
+      "recommendation": "Recommended for SSDs to save space. Keep enabled if you use hibernate regularly on laptops."
+    },
+    "disable_sleep": {
+      "name": "Disable Sleep Mode",
+      "description": "Prevents the PC from automatically going to sleep",
+      "detailedDescription": "Disables automatic sleep when connected to AC power. The PC will stay on indefinitely until manually put to sleep or shut down. Useful for servers, media centers, or long-running tasks.",
+      "impact": "PC never enters sleep mode automatically. Higher power consumption when idle. Monitor still turns off based on settings.",
+      "recommendation": "For desktops that should stay on 24/7. Not recommended for laptops on battery power."
+    },
+    "disable_usb_suspend": {
+      "name": "Disable USB Selective Suspend",
+      "description": "Prevents Windows from suspending USB devices to save power",
+      "detailedDescription": "USB Selective Suspend allows Windows to put individual USB ports into a low-power state when the connected device is idle. This can cause USB devices to disconnect unexpectedly or cause audio crackling.",
+      "impact": "Slightly higher power consumption. USB devices remain fully powered and responsive. Fixes USB disconnect issues.",
+      "recommendation": "Recommended if you experience USB device disconnects, audio crackling, or peripheral issues."
+    },
+    "disable_wake_timers": {
+      "name": "Disable Wake Timers",
+      "description": "Prevents scheduled tasks from waking the PC from sleep",
+      "detailedDescription": "Wake timers allow Windows and programs to wake your PC from sleep to run scheduled tasks like Windows Update, antivirus scans, or backup jobs. Disabling them keeps your PC asleep until you wake it manually.",
+      "impact": "PC won't wake unexpectedly from sleep during the night. Some scheduled tasks may be delayed until next wake.",
+      "recommendation": "Recommended if your PC wakes up unexpectedly during the night. Some updates may be delayed."
+    },
+
+    "clean_temp_files": {
+      "name": "Clean Temporary Files",
+      "description": "Removes temporary files from Windows and user temp folders",
+      "detailedDescription": "Cleans temporary files from %TEMP%, Windows\\Temp, and other temporary locations. These files are safe to delete and are recreated as needed by applications.",
+      "impact": "Frees up disk space immediately. No negative effects on system functionality. Apps recreate temp files as needed.",
+      "recommendation": "Safe to run regularly. Recommended monthly or when running low on disk space."
+    },
+    "clean_windows_update_cache": {
+      "name": "Clean Windows Update Cache",
+      "description": "Clears the Windows Update download cache to free up disk space",
+      "detailedDescription": "Windows keeps downloaded updates in the SoftwareDistribution folder even after installation. This can grow to several GB over time. Clearing it forces Windows to re-download updates if needed.",
+      "impact": "Can free up several GB of disk space. Updates will need to be re-downloaded if not yet installed.",
+      "recommendation": "Safe to run after updates are installed. May cause temporary issues during active updates."
+    },
+    "disable_prefetch": {
+      "name": "Disable Prefetch",
+      "description": "Disables Windows Prefetch to reduce disk writes on SSDs",
+      "detailedDescription": "Prefetch preloads frequently used applications into memory. On SSDs this provides minimal benefit but causes extra disk writes. Disabling it can help extend SSD lifespan.",
+      "impact": "First app launch may be slightly slower. Reduces SSD wear. Frees up some disk space.",
+      "recommendation": "Recommended for SSDs only. Keep enabled on HDDs for faster app loading."
+    },
+    "disable_superfetch": {
+      "name": "Disable Superfetch (SysMain)",
+      "description": "Disables Superfetch/SysMain service to reduce disk activity",
+      "detailedDescription": "Superfetch (renamed SysMain in Windows 10) preloads apps you use frequently. On SSDs this can cause high disk usage with minimal benefit. It's designed for HDDs.",
+      "impact": "Reduces random disk I/O significantly. Apps may take slightly longer to start. Reduces SSD wear.",
+      "recommendation": "Recommended for SSDs. Keep enabled on HDDs for better performance."
+    },
+    "run_ssd_trim": {
+      "name": "Run SSD TRIM",
+      "description": "Manually runs TRIM optimization on all SSDs to maintain performance",
+      "detailedDescription": "TRIM tells the SSD which blocks are no longer in use, allowing the drive to optimize internal garbage collection. Windows runs this weekly, but you can trigger it manually.",
+      "impact": "Improves SSD performance and longevity. No data is deleted. Operation is fast.",
+      "recommendation": "Safe to run anytime. Windows does this automatically weekly. Run after large file deletions."
+    },
+    "clean_recycle_bin": {
+      "name": "Empty Recycle Bin",
+      "description": "Empties the Recycle Bin to free up disk space",
+      "detailedDescription": "The Recycle Bin keeps deleted files until you empty it. These files still occupy disk space. This action permanently deletes all files in the Recycle Bin.",
+      "impact": "Frees disk space used by deleted files. Files cannot be recovered after emptying.",
+      "recommendation": "Safe to run when you're sure you don't need deleted files. Check Recycle Bin first."
+    },
+    "clean_thumbnails_cache": {
+      "name": "Clean Thumbnails Cache",
+      "description": "Clears the Explorer thumbnail cache to free up disk space",
+      "detailedDescription": "Windows caches thumbnails for images, videos, and documents in the Explorer thumbcache. Over time this can grow quite large. Thumbnails are regenerated as needed.",
+      "impact": "Frees disk space. First folder access may be slightly slower while thumbnails regenerate.",
+      "recommendation": "Safe to run regularly. Thumbnails are rebuilt automatically when viewing folders."
+    }
+  }
+}

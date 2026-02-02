@@ -1,0 +1,35 @@
+# Build outputs
+bin/
+obj/
+out/
+publish/
+
+# IDE
+.vs/
+.vscode/
+*.user
+*.suo
+
+# Compiled files
+*.exe
+*.dll
+*.pdb
+
+# Logs
+*.log
+logs/
+
+# Backup files
+*.bak
+backup/
+
+# OS files
+Thumbs.db
+.DS_Store
+
+# NuGet
+packages/
+*.nupkg
+
+# Test results
+TestResults/

@@ -1,0 +1,19 @@
+{
+  "name": "Balanced",
+  "description": "Recommended settings for most users. Improves privacy and performance without breaking functionality.",
+  "version": "1.0.0",
+  "tweaks": [
+    "disable_telemetry",
+    "disable_advertising_id",
+    "disable_activity_history",
+    "disable_feedback",
+    "disable_tailored_experiences",
+    "disable_typing_data",
+    "disable_app_launch_tracking",
+    "disable_background_apps",
+    "disable_scheduled_tasks",
+    "configure_windows_update",
+    "disable_autoplay",
+    "disable_widgets"
+  ]
+}
